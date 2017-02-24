@@ -136,5 +136,13 @@ y=percent, colour="Min Vol"),show.legend = TRUE)
 ```
 
 ```{r}
+#IBM
 ggplot(ibm, aes(Date, sd)) + geom_line() + xlab("Time") + ylab("252-day rolling SD")
+
+#Apple
+ggplot(aapl, aes(Date, sd)) + geom_line() + xlab("Time") + ylab("252-day rolling SD")
+
+#Microsoft
+ggplot(msft, aes(Date, sd)) + geom_line() + xlab("Time") + ylab("252-day rolling SD")
+
 ```
