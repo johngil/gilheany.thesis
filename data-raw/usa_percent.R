@@ -961,5 +961,6 @@ colnames(table1)[1] <- "sector_name"
 table1 <- transform(table1, percent = as.numeric(percent))
 usa_percent <- rbind(table1, usa_percent)
 
+
 devtools::use_data(usa_percent,overwrite = TRUE)
 
