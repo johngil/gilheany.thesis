@@ -29,7 +29,7 @@ daily_rolling_sd_data <- rbind(msft, aapl, ibm)
 
 
 devtools::use_data(daily_rolling_sd_data,overwrite = TRUE)
-devtools::use_data(msft,overwrite = TRUE)
-devtools::use_data(aapl,overwrite = TRUE)
-devtools::use_data(ibm,overwrite = TRUE)
+devtools::use_data(msft)
+devtools::use_data(aapl)
+devtools::use_data(ibm)
 
