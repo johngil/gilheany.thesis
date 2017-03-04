@@ -120,8 +120,8 @@ tail(minvol_percent)
 summary(minvol_percent)
 ```
 
-EUSA and USMV weightings by Sector
-```{r}
+# EUSA and USMV weightings by Sector
+```{r, echo = FALSE}
 ## Energy
 Eng1 <- usa_percent[which(usa_percent$sector_name=="Energy"), ]
 Eng2 <- minvol_percent[which(minvol_percent$sector_name=="Energy"), ]
@@ -202,18 +202,1146 @@ xlab("Time") + ylab("Sector Weight") + geom_line(data = Telecom2, aes(x=date,
 y=percent, colour="Min Vol"),show.legend = TRUE)
 ```
 
-# Sample WRDS Data
-10-years of data, from 12/31/2006 to 12/31/2016, was collected from WRDS for IBM, Google, and Apple, to find their 252-day (annual) trailing volatility. 
-```{r}
-#IBM 252-day Trailing Vol from 12/31/2006 to 12/31/2016
-ggplot(ibm, aes(Date, sd)) + ggtitle("IBM 252-day Trailing Vol") + geom_line() +
+# USMV WRDS Data
+10-years of data, from 10/04/2010 to 12/30/2016, was collected from WRDS for the 300 historical constituents of the MSCI Minimum Volatility Index (USMV), to find their 252-day (annual) trailing volatility. 
+```{r, echo = FALSE}
+library(ggplot2)
+library(mscidata)
+
+#AAP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AAP, aes(Date, SD)) + ggtitle("AAP 252-day Trailing Vol") + geom_line() +
 xlab("Time") + ylab("252-day rolling SD")
 
-#Apple 252-day Trailing Vol from 12/31/2006 to 12/31/2016
-ggplot(aapl, aes(Date, sd)) + ggtitle("AAPL 252-day Trailing Vol") + geom_line() +
+#ABBV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ABBV, aes(Date, SD)) + ggtitle("ABBV 252-day Trailing Vol") + geom_line() +
 xlab("Time") + ylab("252-day rolling SD")
 
-#Microsoft 252-day Trailing Vol from 12/31/2006 to 12/31/2016
-ggplot(msft, aes(Date, sd)) + ggtitle("MSFT 252-day Trailing Vol") + geom_line() +
+#ABC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ABC, aes(Date, SD)) + ggtitle("ABC 252-day Trailing Vol") + geom_line() +
 xlab("Time") + ylab("252-day rolling SD")
+
+#ABT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ABT, aes(Date, SD)) + ggtitle("ABT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ACE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ACE, aes(Date, SD)) + ggtitle("ACE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ACGL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ACGL, aes(Date, SD)) + ggtitle("ACGL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ACN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ACN, aes(Date, SD)) + ggtitle("ACN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ADBE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ADBE, aes(Date, SD)) + ggtitle("ADBE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ADP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ADP, aes(Date, SD)) + ggtitle("ADP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AEP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AEP, aes(Date, SD)) + ggtitle("AEP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AET 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AET, aes(Date, SD)) + ggtitle("AET 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AGN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AGN, aes(Date, SD)) + ggtitle("AGN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AGNC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AGNC, aes(Date, SD)) + ggtitle("AGNC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ALL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ALL, aes(Date, SD)) + ggtitle("ALL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ALTR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ALTR, aes(Date, SD)) + ggtitle("ALTR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AMGN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AMGN, aes(Date, SD)) + ggtitle("AMGN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AMT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AMT, aes(Date, SD)) + ggtitle("AMT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ANSS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ANSS, aes(Date, SD)) + ggtitle("ANSS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ANTM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ANTM, aes(Date, SD)) + ggtitle("ANTM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AON 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AON, aes(Date, SD)) + ggtitle("AON 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#APH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(APH, aes(Date, SD)) + ggtitle("APH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AR, aes(Date, SD)) + ggtitle("AR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ARMK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ARMK, aes(Date, SD)) + ggtitle("ARMK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ATVI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ATVI, aes(Date, SD)) + ggtitle("ATVI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AVB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AVB, aes(Date, SD)) + ggtitle("AVB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AWK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AWK, aes(Date, SD)) + ggtitle("AWK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AXS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AXS, aes(Date, SD)) + ggtitle("AXS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#AZO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(AZO, aes(Date, SD)) + ggtitle("AZO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BAX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BAX, aes(Date, SD)) + ggtitle("BAX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BBBY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BBBY, aes(Date, SD)) + ggtitle("BBBY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BCR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BCR, aes(Date, SD)) + ggtitle("BCR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BDX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BDX, aes(Date, SD)) + ggtitle("BDX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BIIB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BIIB, aes(Date, SD)) + ggtitle("BIIB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BMC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BMC, aes(Date, SD)) + ggtitle("BMC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BMY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BMY, aes(Date, SD)) + ggtitle("BMY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BR, aes(Date, SD)) + ggtitle("BR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BRX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BRX, aes(Date, SD)) + ggtitle("BRX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BSX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BSX, aes(Date, SD)) + ggtitle("BSX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BXLT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BXLT, aes(Date, SD)) + ggtitle("BXLT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#BXP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(BXP, aes(Date, SD)) + ggtitle("BXP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CA, aes(Date, SD)) + ggtitle("CA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CAG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CAG, aes(Date, SD)) + ggtitle("CAG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CAH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CAH, aes(Date, SD)) + ggtitle("CAH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CB, aes(Date, SD)) + ggtitle("CB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CCI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CCI, aes(Date, SD)) + ggtitle("CCI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CDNS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CDNS, aes(Date, SD)) + ggtitle("CDNS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CELG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CELG, aes(Date, SD)) + ggtitle("CELG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CHD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CHD, aes(Date, SD)) + ggtitle("CHD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CHRW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CHRW, aes(Date, SD)) + ggtitle("CHRW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CHTR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CHTR, aes(Date, SD)) + ggtitle("CHTR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CI, aes(Date, SD)) + ggtitle("CI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CINF 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CINF, aes(Date, SD)) + ggtitle("CINF 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CL, aes(Date, SD)) + ggtitle("CL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CLX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CLX, aes(Date, SD)) + ggtitle("CLX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CMCSA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CMCSA, aes(Date, SD)) + ggtitle("CMCSA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CMCSK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CMCSK, aes(Date, SD)) + ggtitle("CMCSK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CME 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CME, aes(Date, SD)) + ggtitle("CME 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CMG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CMG, aes(Date, SD)) + ggtitle("CMG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COG, aes(Date, SD)) + ggtitle("COG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COLE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COLE, aes(Date, SD)) + ggtitle("COLE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COO, aes(Date, SD)) + ggtitle("COO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COP, aes(Date, SD)) + ggtitle("COP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COST 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COST, aes(Date, SD)) + ggtitle("COST 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#COV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(COV, aes(Date, SD)) + ggtitle("COV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CPB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CPB, aes(Date, SD)) + ggtitle("CPB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CPT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CPT, aes(Date, SD)) + ggtitle("CPT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CRC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CRC, aes(Date, SD)) + ggtitle("CRC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CSCO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CSCO, aes(Date, SD)) + ggtitle("CSCO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CTAS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CTAS, aes(Date, SD)) + ggtitle("CTAS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CTL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CTL, aes(Date, SD)) + ggtitle("CTL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CVS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CVS, aes(Date, SD)) + ggtitle("CVS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#CVX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(CVX, aes(Date, SD)) + ggtitle("CVX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#D 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(D, aes(Date, SD)) + ggtitle("D 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DD, aes(Date, SD)) + ggtitle("DD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DE, aes(Date, SD)) + ggtitle("DE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DG, aes(Date, SD)) + ggtitle("DG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DGX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DGX, aes(Date, SD)) + ggtitle("DGX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DHR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DHR, aes(Date, SD)) + ggtitle("DHR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DIS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DIS, aes(Date, SD)) + ggtitle("DIS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DLR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DLR, aes(Date, SD)) + ggtitle("DLR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DLTR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DLTR, aes(Date, SD)) + ggtitle("DLTR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DNB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DNB, aes(Date, SD)) + ggtitle("DNB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DPS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DPS, aes(Date, SD)) + ggtitle("DPS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DRI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DRI, aes(Date, SD)) + ggtitle("DRI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DTV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DTV, aes(Date, SD)) + ggtitle("DTV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DUK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DUK, aes(Date, SD)) + ggtitle("DUK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#DVA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(DVA, aes(Date, SD)) + ggtitle("DVA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EBAY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EBAY, aes(Date, SD)) + ggtitle("EBAY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ECL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ECL, aes(Date, SD)) + ggtitle("ECL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ED 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ED, aes(Date, SD)) + ggtitle("ED 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EFX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EFX, aes(Date, SD)) + ggtitle("EFX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EGN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EGN, aes(Date, SD)) + ggtitle("EGN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EMC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EMC, aes(Date, SD)) + ggtitle("EMC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EQR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EQR, aes(Date, SD)) + ggtitle("EQR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ES 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ES, aes(Date, SD)) + ggtitle("ES 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ESRX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ESRX, aes(Date, SD)) + ggtitle("ESRX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ESS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ESS, aes(Date, SD)) + ggtitle("ESS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EW, aes(Date, SD)) + ggtitle("EW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EXPD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EXPD, aes(Date, SD)) + ggtitle("EXPD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#EXR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(EXR, aes(Date, SD)) + ggtitle("EXR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FB, aes(Date, SD)) + ggtitle("FB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FDO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FDO, aes(Date, SD)) + ggtitle("FDO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FIS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FIS, aes(Date, SD)) + ggtitle("FIS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FISV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FISV, aes(Date, SD)) + ggtitle("FISV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FL, aes(Date, SD)) + ggtitle("FL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FNF 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FNF, aes(Date, SD)) + ggtitle("FNF 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FRC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FRC, aes(Date, SD)) + ggtitle("FRC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FRT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FRT, aes(Date, SD)) + ggtitle("FRT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FRX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FRX, aes(Date, SD)) + ggtitle("FRX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FTR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FTR, aes(Date, SD)) + ggtitle("FTR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#FTV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(FTV, aes(Date, SD)) + ggtitle("FTV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GAS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GAS, aes(Date, SD)) + ggtitle("GAS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GD, aes(Date, SD)) + ggtitle("GD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GGP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GGP, aes(Date, SD)) + ggtitle("GGP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GILD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GILD, aes(Date, SD)) + ggtitle("GILD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GIS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GIS, aes(Date, SD)) + ggtitle("GIS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GOOG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GOOG, aes(Date, SD)) + ggtitle("GOOG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GOOGL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GOOGL, aes(Date, SD)) + ggtitle("GOOGL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GPC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GPC, aes(Date, SD)) + ggtitle("GPC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GR, aes(Date, SD)) + ggtitle("GR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#GWW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(GWW, aes(Date, SD)) + ggtitle("GWW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HCN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HCN, aes(Date, SD)) + ggtitle("HCN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HCP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HCP, aes(Date, SD)) + ggtitle("HCP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HD, aes(Date, SD)) + ggtitle("HD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HNZ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HNZ, aes(Date, SD)) + ggtitle("HNZ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HOLX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HOLX, aes(Date, SD)) + ggtitle("HOLX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HRL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HRL, aes(Date, SD)) + ggtitle("HRL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HSIC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HSIC, aes(Date, SD)) + ggtitle("HSIC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HSY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HSY, aes(Date, SD)) + ggtitle("HSY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#HUM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(HUM, aes(Date, SD)) + ggtitle("HUM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#IBM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(IBM, aes(Date, SD)) + ggtitle("IBM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#IHS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(IHS, aes(Date, SD)) + ggtitle("IHS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#INCO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(INCO, aes(Date, SD)) + ggtitle("INCO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#INTC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(INTC, aes(Date, SD)) + ggtitle("INTC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#INTU 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(INTU, aes(Date, SD)) + ggtitle("INTU 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ISRG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ISRG, aes(Date, SD)) + ggtitle("ISRG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#IT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(IT, aes(Date, SD)) + ggtitle("IT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#JBHT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(JBHT, aes(Date, SD)) + ggtitle("JBHT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#JNJ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(JNJ, aes(Date, SD)) + ggtitle("JNJ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#JWN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(JWN, aes(Date, SD)) + ggtitle("JWN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#K 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(K, aes(Date, SD)) + ggtitle("K 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KFT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KFT, aes(Date, SD)) + ggtitle("KFT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KMB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KMB, aes(Date, SD)) + ggtitle("KMB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KMI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KMI, aes(Date, SD)) + ggtitle("KMI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KMR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KMR, aes(Date, SD)) + ggtitle("KMR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KO, aes(Date, SD)) + ggtitle("KO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#KRFT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(KRFT, aes(Date, SD)) + ggtitle("KRFT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LB, aes(Date, SD)) + ggtitle("LB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LDOS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LDOS, aes(Date, SD)) + ggtitle("LDOS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LH, aes(Date, SD)) + ggtitle("LH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LIFE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LIFE, aes(Date, SD)) + ggtitle("LIFE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LLTC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LLTC, aes(Date, SD)) + ggtitle("LLTC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LLY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LLY, aes(Date, SD)) + ggtitle("LLY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LMT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LMT, aes(Date, SD)) + ggtitle("LMT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LO, aes(Date, SD)) + ggtitle("LO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LOW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LOW, aes(Date, SD)) + ggtitle("LOW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#LUV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(LUV, aes(Date, SD)) + ggtitle("LUV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MA, aes(Date, SD)) + ggtitle("MA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MAC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MAC, aes(Date, SD)) + ggtitle("MAC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MAT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MAT, aes(Date, SD)) + ggtitle("MAT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MCD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MCD, aes(Date, SD)) + ggtitle("MCD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MCK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MCK, aes(Date, SD)) + ggtitle("MCK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MDLZ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MDLZ, aes(Date, SD)) + ggtitle("MDLZ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MDT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MDT, aes(Date, SD)) + ggtitle("MDT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MHFI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MHFI, aes(Date, SD)) + ggtitle("MHFI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MKC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MKC, aes(Date, SD)) + ggtitle("MKC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MKL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MKL, aes(Date, SD)) + ggtitle("MKL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MMC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MMC, aes(Date, SD)) + ggtitle("MMC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MMM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MMM, aes(Date, SD)) + ggtitle("MMM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MNK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MNK, aes(Date, SD)) + ggtitle("MNK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MO, aes(Date, SD)) + ggtitle("MO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MON 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MON, aes(Date, SD)) + ggtitle("MON 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MRK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MRK, aes(Date, SD)) + ggtitle("MRK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MSFT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MSFT, aes(Date, SD)) + ggtitle("MSFT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MSI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MSI, aes(Date, SD)) + ggtitle("MSI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#MTB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(MTB, aes(Date, SD)) + ggtitle("MTB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NEE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NEE, aes(Date, SD)) + ggtitle("NEE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NEM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NEM, aes(Date, SD)) + ggtitle("NEM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NKE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NKE, aes(Date, SD)) + ggtitle("NKE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NLSN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NLSN, aes(Date, SD)) + ggtitle("NLSN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NLY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NLY, aes(Date, SD)) + ggtitle("NLY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NNN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NNN, aes(Date, SD)) + ggtitle("NNN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NOC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NOC, aes(Date, SD)) + ggtitle("NOC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NST 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NST, aes(Date, SD)) + ggtitle("NST 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#NWSA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(NWSA, aes(Date, SD)) + ggtitle("NWSA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#O 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(O, aes(Date, SD)) + ggtitle("O 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#OCR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(OCR, aes(Date, SD)) + ggtitle("OCR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#OMC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(OMC, aes(Date, SD)) + ggtitle("OMC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ORCL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ORCL, aes(Date, SD)) + ggtitle("ORCL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ORLY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ORLY, aes(Date, SD)) + ggtitle("ORLY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#OXY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(OXY, aes(Date, SD)) + ggtitle("OXY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PAYX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PAYX, aes(Date, SD)) + ggtitle("PAYX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PBCT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PBCT, aes(Date, SD)) + ggtitle("PBCT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PCG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PCG, aes(Date, SD)) + ggtitle("PCG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PCP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PCP, aes(Date, SD)) + ggtitle("PCP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PDCO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PDCO, aes(Date, SD)) + ggtitle("PDCO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PEP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PEP, aes(Date, SD)) + ggtitle("PEP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PETM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PETM, aes(Date, SD)) + ggtitle("PETM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PFE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PFE, aes(Date, SD)) + ggtitle("PFE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PG, aes(Date, SD)) + ggtitle("PG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PGN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PGN, aes(Date, SD)) + ggtitle("PGN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PGR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PGR, aes(Date, SD)) + ggtitle("PGR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PM, aes(Date, SD)) + ggtitle("PM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#POM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(POM, aes(Date, SD)) + ggtitle("POM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PRE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PRE, aes(Date, SD)) + ggtitle("PRE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PRGO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PRGO, aes(Date, SD)) + ggtitle("PRGO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PSA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PSA, aes(Date, SD)) + ggtitle("PSA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PSX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PSX, aes(Date, SD)) + ggtitle("PSX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PX, aes(Date, SD)) + ggtitle("PX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#PYPL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(PYPL, aes(Date, SD)) + ggtitle("PYPL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#Q 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(Q, aes(Date, SD)) + ggtitle("Q 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#QCOM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(QCOM, aes(Date, SD)) + ggtitle("QCOM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RAI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RAI, aes(Date, SD)) + ggtitle("RAI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RE, aes(Date, SD)) + ggtitle("RE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#REG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(REG, aes(Date, SD)) + ggtitle("REG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RMD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RMD, aes(Date, SD)) + ggtitle("RMD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RNR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RNR, aes(Date, SD)) + ggtitle("RNR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ROST 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ROST, aes(Date, SD)) + ggtitle("ROST 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RSG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RSG, aes(Date, SD)) + ggtitle("RSG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#RTN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(RTN, aes(Date, SD)) + ggtitle("RTN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SBAC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SBAC, aes(Date, SD)) + ggtitle("SBAC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SBUX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SBUX, aes(Date, SD)) + ggtitle("SBUX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SE, aes(Date, SD)) + ggtitle("SE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SHW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SHW, aes(Date, SD)) + ggtitle("SHW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SIAL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SIAL, aes(Date, SD)) + ggtitle("SIAL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SJM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SJM, aes(Date, SD)) + ggtitle("SJM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SLB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SLB, aes(Date, SD)) + ggtitle("SLB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SNI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SNI, aes(Date, SD)) + ggtitle("SNI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SNPS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SNPS, aes(Date, SD)) + ggtitle("SNPS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SO, aes(Date, SD)) + ggtitle("SO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SPG 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SPG, aes(Date, SD)) + ggtitle("SPG 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SRCL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SRCL, aes(Date, SD)) + ggtitle("SRCL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SRE 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SRE, aes(Date, SD)) + ggtitle("SRE 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#STJ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(STJ, aes(Date, SD)) + ggtitle("STJ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#STZ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(STZ, aes(Date, SD)) + ggtitle("STZ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SYK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SYK, aes(Date, SD)) + ggtitle("SYK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SYMC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SYMC, aes(Date, SD)) + ggtitle("SYMC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#SYY 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(SYY, aes(Date, SD)) + ggtitle("SYY 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#T 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(T, aes(Date, SD)) + ggtitle("T 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TGT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TGT, aes(Date, SD)) + ggtitle("TGT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TJX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TJX, aes(Date, SD)) + ggtitle("TJX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TMO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TMO, aes(Date, SD)) + ggtitle("TMO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TRV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TRV, aes(Date, SD)) + ggtitle("TRV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TSS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TSS, aes(Date, SD)) + ggtitle("TSS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#TXN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(TXN, aes(Date, SD)) + ggtitle("TXN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UDR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UDR, aes(Date, SD)) + ggtitle("UDR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UHS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UHS, aes(Date, SD)) + ggtitle("UHS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ULTA 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ULTA, aes(Date, SD)) + ggtitle("ULTA 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UNH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UNH, aes(Date, SD)) + ggtitle("UNH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UNP 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UNP, aes(Date, SD)) + ggtitle("UNP 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UPS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UPS, aes(Date, SD)) + ggtitle("UPS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#USB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(USB, aes(Date, SD)) + ggtitle("USB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#USD 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(USD, aes(Date, SD)) + ggtitle("USD 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#UTX 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(UTX, aes(Date, SD)) + ggtitle("UTX 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#V 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(V, aes(Date, SD)) + ggtitle("V 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VAL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VAL, aes(Date, SD)) + ggtitle("VAL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VAR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VAR, aes(Date, SD)) + ggtitle("VAR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VFC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VFC, aes(Date, SD)) + ggtitle("VFC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VMW 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VMW, aes(Date, SD)) + ggtitle("VMW 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VNO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VNO, aes(Date, SD)) + ggtitle("VNO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VNTV 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VNTV, aes(Date, SD)) + ggtitle("VNTV 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VRSK 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VRSK, aes(Date, SD)) + ggtitle("VRSK 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VRSN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VRSN, aes(Date, SD)) + ggtitle("VRSN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VTR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VTR, aes(Date, SD)) + ggtitle("VTR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#VZ 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(VZ, aes(Date, SD)) + ggtitle("VZ 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WAT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WAT, aes(Date, SD)) + ggtitle("WAT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WCN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WCN, aes(Date, SD)) + ggtitle("WCN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WEC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WEC, aes(Date, SD)) + ggtitle("WEC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WFC 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WFC, aes(Date, SD)) + ggtitle("WFC 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WIN 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WIN, aes(Date, SD)) + ggtitle("WIN 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WM, aes(Date, SD)) + ggtitle("WM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WMT 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WMT, aes(Date, SD)) + ggtitle("WMT 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WPI 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WPI, aes(Date, SD)) + ggtitle("WPI 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WR 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WR, aes(Date, SD)) + ggtitle("WR 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WRB 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WRB, aes(Date, SD)) + ggtitle("WRB 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#WSH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(WSH, aes(Date, SD)) + ggtitle("WSH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#XEL 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(XEL, aes(Date, SD)) + ggtitle("XEL 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#XOM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(XOM, aes(Date, SD)) + ggtitle("XOM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#Y 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(Y, aes(Date, SD)) + ggtitle("Y 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#YHOO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(YHOO, aes(Date, SD)) + ggtitle("YHOO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#YUM 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(YUM, aes(Date, SD)) + ggtitle("YUM 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ZAYO 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ZAYO, aes(Date, SD)) + ggtitle("ZAYO 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ZBH 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ZBH, aes(Date, SD)) + ggtitle("ZBH 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
+#ZTS 252-day Trailing Vol from 10/04/2010 to 12/30/2016
+ggplot(ZTS, aes(Date, SD)) + ggtitle("ZTS 252-day Trailing Vol") + geom_line() +
+xlab("Time") + ylab("252-day rolling SD")
+
 ```
