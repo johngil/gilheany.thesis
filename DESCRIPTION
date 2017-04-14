@@ -17,6 +17,5 @@ Imports:
     ggplot,
     quantmod,
     PerformanceAnalytics,
-    ggplot2,
     TTR,
     zoo
