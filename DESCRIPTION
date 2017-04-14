@@ -14,7 +14,7 @@ License: None
 LazyData: TRUE
 Imports:
     dplyr,
-    ggplot,
+    ggplot2,
     quantmod,
     PerformanceAnalytics,
     TTR,
