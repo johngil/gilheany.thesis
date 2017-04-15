@@ -1,3 +1,40 @@
+--- 
+title: "Thesis"
+author: "John Gilheany"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::pdf_book
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Thesis stuff"
+---
+
+# Opening Comments
+
+<!--chapter:end:index.Rmd-->
+
+
+# Introduction {#intro}
+
+<!--chapter:end:01-intro.Rmd-->
+
+
+# Literature Review
+
+<!--chapter:end:02-literature.Rmd-->
+
+
+# Data Collection and Summary Statistics
+
+<!--chapter:end:03-data_collection.Rmd-->
+
+
+# Data Analysis 
+
+<!--chapter:end:04-data_analysis.Rmd-->
+
 ---
 title: "05-new-data-analysis"
 author: "John Gilheany"
@@ -9,6 +46,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, echo=TRUE}
 # Rolling Vol loop calculation
 library(dplyr)
 library(quantmod)
@@ -70,6 +108,7 @@ unique_tickers
 new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_tickers.txt",
 						sep="\t", col.names = FALSE, row.names = FALSE, quote = FALSE)
 
+```
 
 
 ```{r, echo=TRUE}
@@ -78,8 +117,7 @@ new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_ti
 
 library(dplyr)
 library(quantmod)
-library(lubridate)
-data(wrds_data)
+load(wrds_data)
 colnames(wrds_data) <- c("ID", "Date","Ticker","Price")
 
 # Date column needs to be converted to date class
@@ -97,7 +135,7 @@ for (ticker in unique_tickers){
 	temp <- select(temp, Date, Ticker, Price)
 	temp <- temp[complete.cases(temp),]
 
-	# Create different datasets by state. Make sure file has at least 252 non NA values
+	# Create different datasets by state. Make sure file has at least 12 non NA values
 	if (nrow(temp) > 252){
 		ticker_data <- filter(wrds_data, Ticker == ticker)
 		ticker_data <- select(ticker_data, Date, Ticker, Price)
@@ -112,27 +150,19 @@ for (ticker in unique_tickers){
 	final_rolling_vol$Date <- as.Date(final_rolling_vol$Date)
 }
 
-# Daily Rolling Vols
 final_rolling_vol <- final_rolling_vol[complete.cases(final_rolling_vol),]
 
-# Month end reported Rolling Vols
-monthly_rolling_vol <- final_rolling_vol[endpoints(final_rolling_vol$Date, on = "months"), ]
-monthly_rolling_vol$Date <- as.Date(monthly_rolling_vol$Date)
-
-ggplot(monthly_rolling_vol, aes(Date, Volatility, group = Ticker)) +
+ggplot(final_rolling_vol, aes(Date, Volatility, group = Ticker)) +
 	geom_line()
 
 ```
 
 
 
-# Read in WRDS data for each ticker (Ticker, Price, S&P Return)
-wrds_data_beta <- c4af81a191300d4d
-colnames(wrds_data_beta) <- c("ID", "Date","Ticker","Price", "S&P_Return")
+<!--chapter:end:05-new-data-analysis.Rmd-->
 
 
+# Bibliography 
 
-
-
-
+<!--chapter:end:08-bibliography.Rmd-->
 
