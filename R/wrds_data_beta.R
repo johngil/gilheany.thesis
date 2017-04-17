@@ -1,7 +1,7 @@
 # Read in WRDS data for each ticker (Ticker, Price, S&P Return)
 # wrds_data_beta <- c4af81a191300d4d
 # colnames(wrds_data_beta) <- c("ID", "Date","Ticker","Price", "SPR")
-
+data(wrds_data_beta)
 # Convert classes
 library(lubridate)
 wrds_data_beta$Date <- ymd(as.character(wrds_data_beta$Date))
