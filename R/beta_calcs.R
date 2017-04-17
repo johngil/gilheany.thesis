@@ -2,6 +2,7 @@
 # wrds_data_beta <- c4af81a191300d4d
 # colnames(wrds_data_beta) <- c("ID", "Date","Ticker","Price", "SPR")
 library(lubridate)
+data(wrds_data_beta)
 # Convert classes
 wrds_data_beta$Date <- ymd(as.character(wrds_data_beta$Date))
 wrds_data_beta$Ticker <- as.factor(wrds_data_beta$Ticker)

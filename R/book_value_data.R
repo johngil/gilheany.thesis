@@ -1,5 +1,8 @@
 # BOOK VALUE DATA
 library(lubridate)
+
+data(book_value_data)
+
 book_value_data$Date <- ymd(as.character(book_value_data$Date))
 
 # Several variables are in millions. Need to convert multiple by 1000000

@@ -1,3 +1,5 @@
+data(wrds_data_beta)
+
 unique_tickers <- sort(unique(wrds_data_beta$Ticker))
 unique_dates <- sort(unique(wrds_data_beta$Date))
 
