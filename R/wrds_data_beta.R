@@ -9,7 +9,7 @@ wrds_data_beta$Ticker <- as.factor(wrds_data_beta$Ticker)
 
 library(quantmod)
 library(dplyr)
-
+library(base)
 
 # unique tickers
 unique_tickers <- sort(unique(wrds_data_beta$Ticker))
