@@ -8,6 +8,7 @@ wrds_data_beta$Date <- ymd(as.character(wrds_data_beta$Date))
 wrds_data_beta$Ticker <- as.factor(wrds_data_beta$Ticker)
 
 library(quantmod)
+library(dplyr)
 
 # unique tickers
 unique_tickers <- sort(unique(wrds_data_beta$Ticker))
