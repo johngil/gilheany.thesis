@@ -4,6 +4,8 @@
 library(lubridate)
 data(wrds_data_beta)
 library(base)
+
+library(base)
 # Convert classes
 wrds_data_beta$Date <- ymd(as.character(wrds_data_beta$Date))
 wrds_data_beta$Ticker <- as.factor(wrds_data_beta$Ticker)
@@ -33,7 +35,7 @@ for (ticker in unique_tickers){
 	}
 
 	beta_calcs <- rbind(beta_calcs, ticker_data)
-#	beta_calcs$Date <- as.Date(beta_calcs$Date)
+	beta_calcs$Date <- as.Date(beta_calcs$Date)
 }
 
 # Arrange wrds_data_beta tickers in alphabetical order (same order as beta_calcs)

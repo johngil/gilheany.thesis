@@ -1,6 +1,8 @@
 # Rolling Vol loop calculation
 library(dplyr)
 library(quantmod)
+library(base)
+
 data(usa)
 
 # Unique tickers in USA data set, in alphabetical order
