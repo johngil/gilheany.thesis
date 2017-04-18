@@ -35,7 +35,7 @@ for (ticker in unique_tickers){
 	}
 
 	beta_calcs <- rbind(beta_calcs, ticker_data)
-#	beta_calcs$Date <- as.Date(beta_calcs$Date)
+#	beta_calcs$Date <- as.Date(beta_calcs$Date, origin="1960-10-01")
 }
 
 # Arrange wrds_data_beta tickers in alphabetical order (same order as beta_calcs)

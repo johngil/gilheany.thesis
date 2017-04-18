@@ -25,12 +25,12 @@ for (ticker in unique_tickers){
 		ticker_data$Beta <- ticker_data$Cov/ticker_data$Var
 		ticker_data <- select(ticker_data, Date, Ticker, Cov, Var, Beta)
 		ticker_data <- ticker_data[complete.cases(ticker_data),]
-#		ticker_data$Date <- as.Date(ticker_data$Date)
+		ticker_data$Date <- as.Date(ticker_data$Date, origin="1960-10-01")
 	}
 	else {
 	}
 	beta_values <- rbind(beta_values, ticker_data)
-	beta_values$Date <- as.Date(beta_values$Date)
+#	beta_values$Date <- as.Date(beta_values$Date)
 }
 
 wrds_data_beta <- merge(wrds_data_beta, beta_values, by = c("Ticker", "Date"))
