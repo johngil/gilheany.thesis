@@ -39,7 +39,7 @@ for (ticker in unique_tickers){
 	}
 
 	final_rolling_vol <- rbind(final_rolling_vol, ticker_data)
-	final_rolling_vol$Date <- as.Date(final_rolling_vol$Date)
+#	final_rolling_vol$Date <- as.Date(final_rolling_vol$Date)
 }
 
 library(ggvis)
