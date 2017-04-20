@@ -1,6 +1,4 @@
-minvol_percent <- data.frame()
-
-
+minvol_percent <- data.frame();
 minvol1 <- minvol[which(minvol$Date =="2011-10-31"),]
 sector_name <- unique(minvol1$Sector)
 sector_count <- table(minvol1$Sector)
@@ -11,8 +9,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -26,8 +23,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -41,8 +37,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -56,8 +51,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -71,8 +65,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -86,8 +79,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -101,8 +93,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -116,8 +107,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -131,8 +121,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -146,8 +135,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -161,8 +149,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -176,8 +163,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -191,8 +177,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -206,8 +191,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -221,8 +205,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -236,8 +219,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -251,8 +233,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -266,8 +247,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -281,8 +261,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -296,8 +275,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -311,8 +289,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -326,8 +303,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -341,8 +317,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -356,8 +331,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -371,8 +345,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -386,8 +359,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -401,8 +373,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -416,8 +387,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -431,8 +401,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -446,8 +415,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -461,8 +429,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -476,8 +443,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -491,8 +457,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -506,8 +471,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -521,8 +485,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -536,8 +499,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -551,8 +513,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -566,8 +527,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -581,8 +541,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -596,8 +555,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -611,8 +569,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -626,8 +583,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -641,8 +597,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -656,8 +611,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -671,8 +625,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -686,8 +639,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -701,8 +653,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -716,8 +667,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -731,8 +681,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -746,8 +695,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -761,8 +709,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -776,8 +723,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -791,8 +737,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -806,8 +751,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -821,8 +765,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -836,8 +779,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -851,8 +793,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -866,8 +807,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -881,8 +821,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -896,8 +835,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -911,8 +849,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -926,8 +863,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -941,8 +877,7 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
@@ -956,10 +891,9 @@ table1 <- cbind(sector_count, total, percent, date)
 table1 <- as_tibble(table1, preserve_row_names = TRUE)
 table1 <- table1 %>%
 	mutate(date = lubridate::ymd(date))
-table1 <- cbind(levels(sector_name),table1)
-colnames(table1)[1] <- "sector_name"
+colnames(table1)[1] <- "sector"
 table1 <- transform(table1, percent = as.numeric(percent))
 minvol_percent <- rbind(table1, minvol_percent)
 
 
-devtools::use_data(minvol_percent,overwrite = TRUE)
+
