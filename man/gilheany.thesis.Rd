@@ -18,5 +18,6 @@ aggregate of ishares data from the MSCI USA Equal Weight Index (EUSA) from 2011-
 
 \bold{monthly}
 
-monthly data, including 10 years of data for each ticker on trailing beta, trailing volatility, market cap, book value, and P/B ratio.
+monthly data, including 10 years of data for each ticker on trailing beta, trailing volatility,
+market cap, book value, and P/B ratio.
 }
