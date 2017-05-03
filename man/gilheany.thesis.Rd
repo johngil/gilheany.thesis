@@ -20,4 +20,5 @@ aggregate of ishares data from the MSCI USA Equal Weight Index (EUSA) from 2011-
 
 month end trailing volatility, beta, market cap, book value, B/P for each ticker. Dates range from 2008-01-31 to 2016-12-31. Data coming from monthly_rolling_vol and monthly_beta_values
 
+
 }
