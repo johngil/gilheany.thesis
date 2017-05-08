@@ -82,6 +82,9 @@ usa$ticker[usa$ticker == "UAA"] <- "UA"
 usa$ticker[usa$ticker == "BF.B"] <- "BF-B"
 usa$ticker[usa$ticker == "BF/B"] <- "BF-B"
 
+# KMI WS is a KINDER MORGAN EQUITY WARRANTS EXP --> removed
+usa <- filter(usa, ticker != "KMI WS")
+
 # ALPHA NATURAL RESOURCES AND US STEEL HAVE NA VALUES. WILL MANUALLY ADD TICKERS IN
 # Will add tickers for the two by creating new data set, then removing the old data and rbinding it
 X <- filter(usa, name == "US STEEL CORP CORP")
@@ -109,6 +112,9 @@ unique_tickers <- unique(usa$ticker)
 new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_tickers.txt",
 												sep="\t", col.names = FALSE, row.names = FALSE, quote = FALSE)
 
+
+# Create backbone of monthly data set --> subset data with
+monthly1 <- select(usa, ticker, date)
 
 # Fill in values for vol, beta
 

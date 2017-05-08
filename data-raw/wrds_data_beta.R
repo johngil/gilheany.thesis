@@ -1,6 +1,6 @@
 # Read in WRDS data for each ticker (Ticker, Price, S&P Return)
-# wrds_data_beta <- c4af81a191300d4d
-# colnames(wrds_data_beta) <- c("ID", "Date","Ticker","Price", "SPR")
+wrds_data_beta <- b14463d7483bf811
+colnames(wrds_data_beta) <- c("ID", "Date","Ticker","Price", "SPR")
 data(wrds_data_beta)
 # Convert classes
 library(lubridate)
@@ -33,7 +33,7 @@ for (ticker in unique_tickers){
 	}
 
 	beta_calcs <- rbind(beta_calcs, ticker_data)
-#	beta_calcs$Date <- as.Date(beta_calcs$Date)
+  beta_calcs$Date <- as.Date(beta_calcs$Date)
 }
 
 # Arrange wrds_data_beta tickers in alphabetical order (same order as beta_calcs)
