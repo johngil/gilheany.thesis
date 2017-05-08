@@ -2,21 +2,21 @@
 View(usa)
 library(dplyr)
 # Get rid of cash and the weird companies with numbers that have no ticker
-usa1 <- usa %>% filter(complete.cases(Ticker))
+usa1 <- usa %>% filter(complete.cases(ticker))
 
 #Create monthly data set with just the tickers and dates from the usa data
-month_data <- select(usa1, Ticker, Date)
-month_data <- arrange(month_data, Ticker, Date)
+month_data <- select(usa1, ticker, date)
+month_data <- arrange(month_data, ticker, date)
 
 # I see some numeric tickers that should be removed. A60, 6COP, etc. Will find them all:
 # Subset to exchanges not NYSE and NASDAQ
-nonusa_ex <- filter(usa, Exchange != "New York Stock Exchange Inc.", Exchange != "NASDAQ")
+nonusa_ex <- filter(usa, exchange != "New York Stock Exchange Inc.", exchange != "NASDAQ")
 
 # I did a check for the data with the two exchanges above, and data is perfect
 
 # Find unique tickers in this nonusa_ex data set
 library(tidyr)
-unique(nonusa_ex$Ticker)
+unique(nonusa_ex$ticker)
 
 # First remove values from the usa data set that had NA values for the tickers
 usa <- usa %>% drop_na(ticker)
@@ -119,7 +119,8 @@ monthly1$date <- as.Date(monthly1$date)
 monthly_beta_values$ticker <- as.factor(monthly_beta_values$ticker)
 
 # Fill in values for vol, beta --> keep monthly1 same, and fill in with beta values from other data set
+colnames(monthly_beta_values) <- c("date", "ticker", "beta")
 monthly2 <- merge(monthly1, monthly_beta_values, by = c("ticker", "date"), all.x = TRUE)
-
+monthly3 <- merge(monthly2, final_rolling_vol, by = c("ticker", "date"), all.x = TRUE)
 
 # Fill in for P/B. Lag 3 months
