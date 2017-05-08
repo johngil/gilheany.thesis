@@ -11,7 +11,7 @@ unique_tickers <- sort(unique(usa$ticker))
 final_rolling_vol <- matrix(ncol=3)
 colnames(final_rolling_vol) <- c("date", "ticker", "volatility")
 
-for (ticker in unique_tickers){
+for (tick in unique_tickers){
 
 	# Empty data set to add rolling vol data to
 	# Set dimensions appropriately
@@ -20,13 +20,13 @@ for (ticker in unique_tickers){
 
 
 	# Test file to make sure enough observations are available
-	temp <- filter(usa, ticker == ticker)
+	temp <- filter(usa, tick == ticker)
 	temp <- select(temp, date, ticker, price)
 	temp <- temp[complete.cases(temp),]
 
 	# Create different datasets by state. Make sure file has at least 12 non NA values
 	if (nrow(temp) > 12){
-		ticker_data <- filter(usa, ticker == ticker)
+		ticker_data <- filter(usa, tick == ticker)
 		ticker_data <- select(ticker_data, date, ticker, price)
 		ticker_data <- ticker_data[complete.cases(ticker_data),]
 		ticker_data$volatility <- runSD(ticker_data$price, n=12)
