@@ -124,3 +124,29 @@ monthly2 <- merge(monthly1, monthly_beta_values, by = c("ticker", "date"), all.x
 monthly3 <- merge(monthly2, final_rolling_vol, by = c("ticker", "date"), all.x = TRUE)
 
 # Fill in for P/B. Lag 3 months
+book_value_data <- select(book_value_data, datadate, tic, at, lt, bkvlps, csho, mkvalt, prcc_f)
+colnames(book_value_data) <- c("date", "ticker", "total_assets", "total_liabilities", "book_value_per_share", "shares_outstanding", "market_value", "stock_price")
+book_value_data$date <- ymd(book_value_data$date)
+# Put in market cap values for dates given, and fill in the remaining values
+market_cap <- select(book_value_data, date, ticker, market_value)
+monthly4 <- merge(monthly3, market_cap, by = c("ticker", "date"), all.x = TRUE)
+monthly4 <- monthly4 %>% fill(market_value)
+# Put in book values for dates given, then lag them 3 months
+# monthly1 has all the dates and tickers we are looking for
+book_value <- select(book_value_data, date, ticker, book_value)
+book_value1 <- merge(monthly1, book_value, by = c("ticker", "date"), all.x = TRUE)
+# Do the following 3x for a 3 month lag
+book_value1$book_value <- lag(book_value1$book_value)
+# Can't really just blindly lag them.....need to do a loop where you are doing it individually
+# But for now this is good enough -- will look at the rest later
+book_value1 <- book_value1 %>% fill(book_value)
+# merge book_value data with other monthly data
+monthly5 <- merge(monthly4, book_value1, by = c("ticker", "date"), all.x = TRUE)
+# Issue with filling in values of NAs that did not have --> could remove NA values first
+# and then fill in later
+monthly5$price_to_book <- monthly5$market_value/monthly5$book_value
+
+
+
+
+
