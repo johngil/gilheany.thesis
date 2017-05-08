@@ -15,12 +15,13 @@ book_value_data$market_value <- book_value_data$market_value * 1000000
 book_value_data$share_price <- book_value_data$market_value / book_value_data$shares_outstanding
 
 # Find total Book value by multiplying book price per share times number of shares outstanding
-book_value_data$Book_Value <- book_value_data$BV_per_share * book_value_data$Shares_Outstanding
+book_value_data$book_value1 <- book_value_data$book_value_per_share * book_value_data$shares_outstanding
+book_value_data$book_value2 <- book_value_data$total_assets - book_value_data$total_liabilities
 
 # One way to find P/B is now to divide Price per share by Book Value per share
-book_value_data$PBR1 <- book_value_data$Share_Price / book_value_data$BV_per_share
+book_value_data$price_to_book1 <- book_value_data$share_price / book_value_data$book_value_per_share
 
 # Another way to find P/B is to divide Market Cap by Book Value
-book_value_data$PBR2 <- book_value_data$Market_Value / book_value_data$Book_Value
+book_value_data$price_to_book2 <- book_value_data$market_value / book_value_data$book_value
 
 # PBR1 and PBR2 should be equal, and they are.
