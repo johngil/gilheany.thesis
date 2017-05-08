@@ -6,32 +6,32 @@ library(base)
 data(usa)
 
 # Unique tickers in USA data set, in alphabetical order
-unique_tickers <- sort(unique(usa$Ticker))
+unique_tickers <- sort(unique(usa$ticker))
 
 final_rolling_vol <- matrix(ncol=3)
-colnames(final_rolling_vol) <- c("Date", "Ticker", "Volatility")
+colnames(final_rolling_vol) <- c("date", "ticker", "volatility")
 
 for (ticker in unique_tickers){
 
 	# Empty data set to add rolling vol data to
 	# Set dimensions appropriately
-	#rolling_vol <- matrix(ncol = 3, nrow = nrow(temp))
-	#colnames(rolling_vol) <- c("Date", "Ticker", "Volatility")
+	rolling_vol <- matrix(ncol = 3, nrow = nrow(temp))
+	colnames(rolling_vol) <- c("date", "ticker", "volatility")
 
 
 	# Test file to make sure enough observations are available
-	temp <- filter(usa, Ticker == ticker)
-	temp <- select(temp, Date, Ticker, Price)
+	temp <- filter(usa, ticker == ticker)
+	temp <- select(temp, date, ticker, price)
 	temp <- temp[complete.cases(temp),]
 
 	# Create different datasets by state. Make sure file has at least 12 non NA values
 	if (nrow(temp) > 12){
-		ticker_data <- filter(usa, Ticker == ticker)
-		ticker_data <- select(ticker_data, Date, Ticker, Price)
+		ticker_data <- filter(usa, ticker == ticker)
+		ticker_data <- select(ticker_data, date, ticker, price)
 		ticker_data <- ticker_data[complete.cases(ticker_data),]
-		ticker_data$Volatility <- runSD(ticker_data$Price, n=12)
-		#ticker_data$Volatility <- sqrt(252) * runSD( ticker_data$Price, 12 )
-		ticker_data <- select(ticker_data, Date, Ticker, Volatility)
+		ticker_data$volatility <- runSD(ticker_data$price, n=12)
+		#ticker_data$volatility <- sqrt(252) * runSD( ticker_data$price, 12 )
+		ticker_data <- select(ticker_data, date, ticker, volatility)
 	}
 	# Put ticker data in to rolling_vol
 	#rolling_vol <- ticker_data
@@ -39,10 +39,10 @@ for (ticker in unique_tickers){
 	}
 
 	final_rolling_vol <- rbind(final_rolling_vol, ticker_data)
-#	final_rolling_vol$Date <- as.Date(final_rolling_vol$Date, origin="1960-10-01")
+	final_rolling_vol$date <- as.Date(final_rolling_vol$date)
 }
 
 library(ggvis)
 
-unique_dates <- unique(final_rolling_vol$Date)
+unique_dates <- unique(final_rolling_vol$date)
 final_rolling_vol <- final_rolling_vol[complete.cases(final_rolling_vol),]

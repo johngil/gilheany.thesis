@@ -115,8 +115,11 @@ new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_ti
 
 # Create backbone of monthly data set --> subset data with
 monthly1 <- select(usa, ticker, date)
+monthly1$date <- as.Date(monthly1$date)
+monthly_beta_values$ticker <- as.factor(monthly_beta_values$ticker)
 
-# Fill in values for vol, beta
+# Fill in values for vol, beta --> keep monthly1 same, and fill in with beta values from other data set
+monthly2 <- merge(monthly1, monthly_beta_values, by = c("ticker", "date"), all.x = TRUE)
 
 
 # Fill in for P/B. Lag 3 months
