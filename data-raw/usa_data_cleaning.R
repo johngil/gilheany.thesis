@@ -74,35 +74,66 @@ usa$ticker[usa$ticker == "TW6"] <- "TW"
 usa$ticker[usa$ticker == "UUM"] <- "UNM"
 usa$ticker[usa$ticker == "USX1"] <- "X"
 usa$ticker[usa$ticker == "WFC*"] <- "WFC"
+usa$ticker[usa$ticker == "MPN"] <- "MPC"
+usa$ticker[usa$ticker == "H9B1"] <- "HTZ"
+usa$ticker[usa$ticker == "NIHDQ"] <- "NIHD"
+usa$ticker[usa$ticker == "PA9"] <- "TRV"
+usa$ticker[usa$ticker == "UPLMQ"] <- "UPL"
+usa$ticker[usa$ticker == "WLTGQ"] <- "WLT"
+
+
 
 # From NYSE/NASDAQ info
 usa$ticker[usa$ticker == "FCX*"] <- "FCX"
 usa$ticker[usa$ticker == "UAC/C"] <- "UA"
 usa$ticker[usa$ticker == "UAA"] <- "UA"
-usa$ticker[usa$ticker == "BF.B"] <- "BF-B"
-usa$ticker[usa$ticker == "BF/B"] <- "BF-B"
+usa$ticker[usa$ticker == "BF/B"] <- "BF"
 
 # KMI WS is a KINDER MORGAN EQUITY WARRANTS EXP --> removed
 usa <- filter(usa, ticker != "KMI WS")
 
-# ALPHA NATURAL RESOURCES AND US STEEL HAVE NA VALUES. WILL MANUALLY ADD TICKERS IN
+# Some tickers have NA values
 # Will add tickers for the two by creating new data set, then removing the old data and rbinding it
 X <- filter(usa, name == "US STEEL CORP CORP")
 X$ticker <- "X"
+
 ANR <- filter(usa, name == "ALPHA NATURAL RESOURCES INC")
 ANR$ticker <- "ANR"
+
 BF <- filter(usa, name == "BROWN FORMAN CORP CLASS B")
-BF$ticker <- "BF-B"
+BF$ticker <- "BF"
 BF$ticker <- as.factor(BF$ticker)
 
-# Drop US Steel and Alpha resources by removing values with NA in ticker
+NIHD <- filter(usa, name == "NII HOLDINGS INC CLASS B")
+NIHD$ticker <- "NIHD"
+NIHD$ticker <- as.factor(NIHD$ticker)
+
+UPL <- filter(usa, name == "ULTRA PETROLEUM CORP")
+UPL$ticker <- "UPL"
+UPL$ticker <- as.factor(UPL$ticker)
+
+WLT <- filter(usa, name == "WALTER ENERGY INC")
+WLT$ticker <- "WLT"
+WLT$ticker <- as.factor(WLT$ticker)
+
+# Drop NA tickers
 usa <- usa %>% drop_na(ticker)
 
 # Rbind X and ANR to usa data set
 usa <- rbind(usa, X)
 usa <- rbind(usa, ANR)
 usa <- rbind(usa, BF)
+usa <- rbind(usa, NIHD)
+usa <- rbind(usa, UPL)
+usa <- rbind(usa, WLT)
+
 usa$ticker <- as.factor(usa$ticker)
+
+# Arrange by ticker
+usa <- arrange(usa, ticker)
+
+# Remove ORCHARD SUPPLY HARDWARE STORES tickers (OSHSQ and OSHWQ)
+usa <- usa[-c(26965, 26966), ]
 
 # Now have updated usa data set with all the tickers
 # need to get the list of unique tickers, and get the WRDS data again
