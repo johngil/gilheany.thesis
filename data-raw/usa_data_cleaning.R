@@ -135,6 +135,7 @@ usa <- arrange(usa, ticker)
 # Remove ORCHARD SUPPLY HARDWARE STORES tickers (OSHSQ and OSHWQ)
 usa <- usa[-c(26965, 26966), ]
 
+
 # Now have updated usa data set with all the tickers
 # need to get the list of unique tickers, and get the WRDS data again
 # Write the tickers into a .txt file to directly upload into WRDS
@@ -144,14 +145,28 @@ new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_ti
 												sep="\t", col.names = FALSE, row.names = FALSE, quote = FALSE)
 
 # We want to compare returns of EUSA with weighted returns from usa data set
-monthly_returns_usa <- select(usa, date, ticker, weight, price)
+monthly_returns_usa <- select(usa, date, ticker, weight)
 monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
+
+# Get price data from WRDS
+# CRSP Daily Stock Data --> ticker and price data only for unique_tickers.txt
+# fa8f8f8f04fe6522 <- read_csv("~/Downloads/fa8f8f8f04fe6522.csv")
+# usa_prices <- fa8f8f8f04fe6522
+colnames(usa_prices) <- c("permco", "date", "ticker", "price")
+usa_prices <- select(usa_prices, date, ticker, price)
+library(lubridate)
+usa_prices$date <- ymd(usa_prices$date)
+usa_prices$ticker <- as.factor(usa_prices$ticker)
+usa$weight <- as.numeric(usa$weight)
+
+# Merge with monthly_returns_usa, by date and ticker
+monthly_returns_usa <- merge(monthly_returns_usa, usa_prices, by = c("date", "ticker"), all.x = TRUE)
 
 # unique tickers
 unique_tickers <- unique(usa$ticker)
 monthly_returns_usa <- matrix(ncol=5)
 colnames(monthly_returns_usa) <- c("date", "ticker", "weight", "price", "delta")
-library(fBasics)
+library(quantmod)
 library(dplyr)
 
 for (n in unique_tickers){
@@ -174,10 +189,13 @@ for (n in unique_tickers){
 	monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
 }
 
-
+# We get 3216 for some reason? Not entirely sure why, but data seems fine
+# there are some NA values --> remove them
+monthly_returns_usa <- monthly_returns_usa[complete.cases(monthly_returns_usa),]
 
 # Multiply returns by weight
-returns$weighted_return <- returns$weight * returns$delta
+monthly_returns_usa$weighted_return <- monthly_returns_usa$weight * monthly_returns_usa$delta
+
 # Aggregate the returns based on date
 returns1 <- aggregate(weighted_return ~ date, data=returns1, FUN=sum)
 
