@@ -143,6 +143,70 @@ unique_tickers <- unique(usa$ticker)
 new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_tickers.txt",
 												sep="\t", col.names = FALSE, row.names = FALSE, quote = FALSE)
 
+# We want to compare returns of EUSA with weighted returns from usa data set
+monthly_returns_usa <- select(usa, date, ticker, weight, price)
+monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
+
+# unique tickers
+unique_tickers <- unique(usa$ticker)
+monthly_returns_usa <- matrix(ncol=5)
+colnames(monthly_returns_usa) <- c("date", "ticker", "weight", "price", "delta")
+library(fBasics)
+library(dplyr)
+
+for (n in unique_tickers){
+	# Test file to make sure enough observations are available
+	temp <- filter(usa, ticker == n)
+	temp <- temp[complete.cases(temp),]
+
+	# Create different datasets by state. Make sure file has at least 252 non NA values
+	if (nrow(temp) > 1){
+		ticker_data <- filter(usa, ticker == n)
+		ticker_data <- select(ticker_data, date, ticker, weight, price)
+		ticker_data <- ticker_data[complete.cases(ticker_data),]
+		ticker_data$delta <- Delt(ticker_data$price)
+		ticker_data <- select(ticker_data, date, ticker, weight, price, delta)
+	}
+	else {
+	}
+
+	monthly_returns_usa <- rbind(monthly_returns_usa, ticker_data)
+	monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
+}
+
+
+
+# Multiply returns by weight
+returns$weighted_return <- returns$weight * returns$delta
+# Aggregate the returns based on date
+returns1 <- aggregate(weighted_return ~ date, data=returns1, FUN=sum)
+
+# Get EUSA index return data for dates in returns1 data set
+eusa_return <- b340d740bd26c371
+eusa_return$date <- ymd(eusa_return$date)
+colnames(eusa_return) <- c("id", "date", "ticker", "price")
+eusa_return$eusa_return <- Delt(eusa_return$price)
+eusa_return$eusa_return <- eusa_return$eusa_return * 100
+eusa_return <- select(eusa_return, date, price, eusa_return)
+
+returns1 <- merge(returns1, eusa_return, by = "date")
+
+# One price return is -32.6, which makes no sense. Became negative somehow
+eusa_return[17, 2] = 32.6300
+
+# Plot returns calculated individually vs returns from EUSA index
+df1<-data.frame(x=returns1$date,y=returns1$weighted_return)
+df2<-data.frame(x=returns1$date,y=returns1$eusa_return)
+
+ggplot(df1,aes(x,y))+geom_line(aes(color="Calculated Return"))+
+	geom_line(data=df2,aes(color="EUSA Index Return"))+
+	labs(color="Legend text")
+
+
+
+_____
+
+
 
 # Create backbone of monthly data set --> subset data with
 monthly1 <- select(usa, ticker, date)
@@ -178,55 +242,3 @@ monthly5 <- merge(monthly4, book_value1, by = c("ticker", "date"), all.x = TRUE)
 monthly5$price_to_book <- monthly5$market_value/monthly5$book_value
 
 -----------------------
-
-# unique tickers
-unique_tickers <- unique(usa$ticker)
-returns <- matrix(ncol=5)
-colnames(returns) <- c("weight", "date", "ticker", "price", "delta")
-
-for (n in unique_tickers){
-	# Test file to make sure enough observations are available
-	temp <- filter(usa, ticker == n)
-	temp <- temp[complete.cases(temp),]
-
-	# Create different datasets by state. Make sure file has at least 252 non NA values
-	if (nrow(temp) > 1){
-		ticker_data <- filter(usa, ticker == n)
-		ticker_data <- select(ticker_data, weight, date, ticker, price)
-		ticker_data <- ticker_data[complete.cases(ticker_data),]
-		ticker_data$delta <- Delt(ticker_data$price)
-		ticker_data <- select(ticker_data, weight, date, ticker, price, delta)
-	}
-	else {
-	}
-
-	returns <- rbind(returns, ticker_data)
-	returns$date <- as.Date(returns$date)
-}
-
-# Multiply returns by weight
-returns$weighted_return <- returns$weight * returns$delta
-# Aggregate the returns based on date
-returns1 <- aggregate(weighted_return ~ date, data=returns1, FUN=sum)
-
-# Get EUSA index return data for dates in returns1 data set
-eusa_return <- b340d740bd26c371
-eusa_return$date <- ymd(eusa_return$date)
-colnames(eusa_return) <- c("id", "date", "ticker", "price")
-eusa_return$eusa_return <- Delt(eusa_return$price)
-eusa_return$eusa_return <- eusa_return$eusa_return * 100
-eusa_return <- select(eusa_return, date, price, eusa_return)
-
-returns1 <- merge(returns1, eusa_return, by = "date")
-
-# One price return is -32.6, which makes no sense. Became negative somehow
-eusa_return[17, 2] = 32.6300
-
-# Plot returns calculated individually vs returns from EUSA index
-df1<-data.frame(x=returns1$date,y=returns1$weighted_return)
-df2<-data.frame(x=returns1$date,y=returns1$eusa_return)
-
-ggplot(df1,aes(x,y))+geom_line(aes(color="Calculated Return"))+
-	geom_line(data=df2,aes(color="EUSA Index Return"))+
-	labs(color="Legend text")
-
