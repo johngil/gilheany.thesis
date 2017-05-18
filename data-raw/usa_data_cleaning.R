@@ -1,4 +1,3 @@
-
 View(usa)
 library(dplyr)
 # Get rid of cash and the weird companies with numbers that have no ticker
@@ -74,35 +73,310 @@ usa$ticker[usa$ticker == "TW6"] <- "TW"
 usa$ticker[usa$ticker == "UUM"] <- "UNM"
 usa$ticker[usa$ticker == "USX1"] <- "X"
 usa$ticker[usa$ticker == "WFC*"] <- "WFC"
+usa$ticker[usa$ticker == "MPN"] <- "MPC"
+usa$ticker[usa$ticker == "H9B1"] <- "HTZ"
+usa$ticker[usa$ticker == "NIHDQ"] <- "NIHD"
+usa$ticker[usa$ticker == "PA9"] <- "TRV"
+usa$ticker[usa$ticker == "UPLMQ"] <- "UPL"
+usa$ticker[usa$ticker == "WLTGQ"] <- "WLT"
 
 # From NYSE/NASDAQ info
 usa$ticker[usa$ticker == "FCX*"] <- "FCX"
 usa$ticker[usa$ticker == "UAC/C"] <- "UA"
 usa$ticker[usa$ticker == "UAA"] <- "UA"
-usa$ticker[usa$ticker == "BF.B"] <- "BF-B"
-usa$ticker[usa$ticker == "BF/B"] <- "BF-B"
+usa$ticker[usa$ticker == "BF/B"] <- "BF"
+
+# Additional updates
+usa$ticker[usa$ticker == "VISA"] <- "V"
+usa$ticker[usa$ticker == "SPXC"] <- "SPW"
+usa$ticker[usa$ticker == "GHC"] <- "WPO"
+usa$ticker[usa$ticker == "LDOS"] <- "SAI"
+usa$ticker[usa$ticker == "AAZ"] <- "APC"
+usa$ticker[usa$ticker == "NCRA"] <- "NWS"
+usa$ticker[usa$ticker == "ANTM"] <- "WLP"
+usa$ticker[usa$ticker == "BRKB"] <- "BRK"
 
 # KMI WS is a KINDER MORGAN EQUITY WARRANTS EXP --> removed
 usa <- filter(usa, ticker != "KMI WS")
 
-# ALPHA NATURAL RESOURCES AND US STEEL HAVE NA VALUES. WILL MANUALLY ADD TICKERS IN
+# Some tickers have NA values
 # Will add tickers for the two by creating new data set, then removing the old data and rbinding it
 X <- filter(usa, name == "US STEEL CORP CORP")
 X$ticker <- "X"
+
 ANR <- filter(usa, name == "ALPHA NATURAL RESOURCES INC")
 ANR$ticker <- "ANR"
+
 BF <- filter(usa, name == "BROWN FORMAN CORP CLASS B")
-BF$ticker <- "BF-B"
+BF$ticker <- "BF"
 BF$ticker <- as.factor(BF$ticker)
 
-# Drop US Steel and Alpha resources by removing values with NA in ticker
+NIHD <- filter(usa, name == "NII HOLDINGS INC CLASS B")
+NIHD$ticker <- "NIHD"
+NIHD$ticker <- as.factor(NIHD$ticker)
+
+UPL <- filter(usa, name == "ULTRA PETROLEUM CORP")
+UPL$ticker <- "UPL"
+UPL$ticker <- as.factor(UPL$ticker)
+
+WLT <- filter(usa, name == "WALTER ENERGY INC")
+WLT$ticker <- "WLT"
+WLT$ticker <- as.factor(WLT$ticker)
+
+WPO <- filter(usa, name == "GRAHAM HOLDINGS COMPANY CO CLASS B")
+WPO$ticker <- "WPO"
+WPO$ticker <- as.factor(WPO$ticker)
+
+SAI <- filter(usa, name == "SAIC INC")
+SAI$ticker <- "SAI"
+SAI$ticker <- as.factor(SAI$ticker)
+
+ANTM <- filter(usa, name == "ANTHEM INC")
+ANTM$ticker <- "ANTM"
+ANTM$ticker <- as.factor(ANTM$ticker)
+
+WLP <- filter(usa, name == "WELLPOINT INC")
+WLP$ticker <- "WLP"
+WLP$ticker <- as.factor(WLP$ticker)
+
+BRK <- filter(usa, name == "BERKSHIRE HATHAWAY INC CLASS B")
+BRK$ticker <- "BRK"
+BRK$ticker <- as.factor(BRK$ticker)
+
+# Drop NA tickers
+library(tidyquant)
 usa <- usa %>% drop_na(ticker)
 
 # Rbind X and ANR to usa data set
 usa <- rbind(usa, X)
 usa <- rbind(usa, ANR)
 usa <- rbind(usa, BF)
+usa <- rbind(usa, NIHD)
+usa <- rbind(usa, UPL)
+usa <- rbind(usa, WLT)
+usa <- rbind(usa, SAI)
+usa <- rbind(usa, WPO)
+usa <- rbind(usa, ANTM)
+usa <- rbind(usa, WLP)
+usa <- rbind(usa, BRK)
+
 usa$ticker <- as.factor(usa$ticker)
+
+# Arrange by ticker
+usa <- arrange(usa, ticker)
+
+# Remove ORCHARD SUPPLY HARDWARE STORES tickers (OSHSQ and OSHWQ)
+usa <- usa[-c(26965, 26966), ]
+
+# usa data set has dates for 2017-01-05. Remove then
+usa <- filter(usa, date != "2017-01-05")
+usa$date <- as.Date(usa$date)
+
+# Several companies change names or tickers midway through data set
+# have to manually input them
+
+# **LPT, LIBERTY PROPERTY REIT TRUST, change to LRY for dates up
+# until 2014-01-31 (but leave as LPT for dates after that)
+LPT <- filter(usa, name == "LIBERTY PROPERTY REIT TRUST")
+LPT$ticker <- "LPT"
+LPT$ticker <- as.factor(LPT$ticker)
+LPT$date <- as.Date(LPT$date)
+
+LPT1 <- filter(LPT, date <= "2014-01-31")
+LPT1$ticker <- "LRY"
+
+LPT <- filter(LPT, date > "2014-01-31")
+
+LPT <- rbind(LPT, LPT1)
+
+usa <- usa[!(usa$name=="LIBERTY PROPERTY REIT TRUST"),]
+
+usa <- rbind(usa, LPT)
+
+
+#**ZBH, ZIMMER BIOMET HOLDINGS INC, change to ZMH for dates up
+# until 2014-11-28, but leave as is for dates after
+ZBH <- filter(usa, name == "ZIMMER BIOMET HOLDINGS INC")
+ZBH$ticker <- "ZBH"
+ZBH$ticker <- as.factor(ZBH$ticker)
+ZBH$date <- as.Date(ZBH$date)
+
+ZBH1 <- filter(ZBH, date <= "2014-11-28")
+ZBH1$ticker <- "ZMH"
+
+ZBH <- filter(ZBH, date > "2014-11-28")
+
+ZBH <- rbind(ZBH, ZBH1)
+
+usa <- usa[!(usa$name=="ZIMMER BIOMET HOLDINGS INC"),]
+
+usa <- rbind(usa, ZBH)
+
+
+# **MHFI, S&P GLOBAL INC, change to MHP
+# until 2013-04-30, then leave it as MHFI
+MHFI <- filter(usa, name == "S&P GLOBAL INC")
+MHFI$ticker <- "MHFI"
+MHFI$ticker <- as.factor(MHFI$ticker)
+MHFI$date <- as.Date(MHFI$date)
+
+MHFI1 <- filter(MHFI, date <= "2013-04-30")
+MHFI1$ticker <- "MHP"
+
+MHFI <- filter(MHFI, date > "2013-04-30")
+
+MHFI <- rbind(MHFI, MHFI1)
+
+usa <- usa[!(usa$name=="S&P GLOBAL INC"),]
+
+usa <- rbind(usa, MHFI)
+
+#**NYCB, NEW YORK COMMUNITY BANCORP INC
+#change to NYB until 2012-10-31, then leave the same
+NYCB <- filter(usa, name == "NEW YORK COMMUNITY BANCORP INC")
+NYCB$ticker <- "NYCB"
+NYCB$ticker <- as.factor(NYCB$ticker)
+NYCB$date <- as.Date(NYCB$date)
+
+NYCB1 <- filter(NYCB, date <= "2012-10-31")
+NYCB1$ticker <- "NYB"
+
+NYCB <- filter(NYCB, date > "2012-10-31")
+
+NYCB <- rbind(NYCB, NYCB1)
+
+usa <- usa[!(usa$name=="NEW YORK COMMUNITY BANCORP INC"),]
+
+usa <- rbind(usa, NYCB)
+
+
+#**EA, ELECTRONIC ARTS INC
+# change to ERTS until 2011-11-30. Then leave as EA.
+EA <- filter(usa, name == "ELECTRONIC ARTS INC")
+EA$ticker <- "EA"
+EA$ticker <- as.factor(EA$ticker)
+EA$date <- as.Date(EA$date)
+
+EA1 <- filter(EA, date <= "2011-11-30")
+EA1$ticker <- "ERTS"
+
+EA <- filter(EA, date > "2011-11-30")
+
+EA <- rbind(EA, EA1)
+
+usa <- usa[!(usa$name=="ELECTRONIC ARTS INC"),]
+
+usa <- rbind(usa, EA)
+
+# **QVCA, LIBERTY INTERACTIVE QVC GROUP CORP
+# LIBERTY INTERACTIVE CORP SERIES A (do this for both)
+# change to LINTA until 2014-09-30 then leave as it
+QVCA <- filter(usa, name == "LIBERTY INTERACTIVE QVC GROUP CORP" | name == "LIBERTY INTERACTIVE CORP SERIES A")
+QVCA$ticker <- "QVCA"
+QVCA$ticker <- as.factor(QVCA$ticker)
+QVCA$date <- as.Date(QVCA$date)
+
+QVCA1 <- filter(QVCA, date <= "2014-09-30")
+QVCA1$ticker <- "LINTA"
+
+QVCA <- filter(QVCA, date > "2014-09-30")
+
+QVCA <- rbind(QVCA, QVCA1)
+
+usa <- usa[!(usa$name == "LIBERTY INTERACTIVE QVC GROUP CORP" | usa$name == "LIBERTY INTERACTIVE CORP SERIES A"),]
+
+usa <- rbind(usa, QVCA)
+
+# **LB, L BRANDS INC
+# change to LTD until 2013-11-29 then leave as is
+LB <- filter(usa, name == "L BRANDS INC")
+LB$ticker <- "LB"
+LB$ticker <- as.factor(LB$ticker)
+LB$date <- as.Date(LB$date)
+
+LB1 <- filter(LB, date <= "2013-11-29")
+LB1$ticker <- "LTD"
+
+LB <- filter(LB, date > "2013-11-29")
+
+LB <- rbind(LB, LB1)
+
+usa <- usa[!(usa$name=="L BRANDS INC"),]
+
+usa <- rbind(usa, LB)
+
+# **ES, NORTHEAST UTILITIES
+# change to NU until 2014-11-28, then leave be).
+ES <- filter(usa, name == "NORTHEAST UTILITIES")
+ES$ticker <- "NU"
+ES$ticker <- as.factor(ES$ticker)
+ES$date <- as.Date(ES$date)
+
+ES1 <- filter(ES, date <= "2014-11-28")
+ES1$ticker <- "NU"
+
+ES <- filter(ES, date > "2014-11-28")
+
+ES <- rbind(ES, ES1)
+
+usa <- usa[!(usa$name=="NORTHEAST UTILITIES"),]
+
+usa <- rbind(usa, ES)
+
+# **JOY, JOY GLOBAL INC
+# change to JOYG until 2011-11-30 then leave be
+JOY <- filter(usa, name == "JOY GLOBAL INC")
+JOY$ticker <- "JOY"
+JOY$ticker <- as.factor(JOY$ticker)
+JOY$date <- as.Date(JOY$date)
+
+JOY1 <- filter(JOY, date <= "2011-11-30")
+JOY1$ticker <- "JOYG"
+
+JOY <- filter(JOY, date > "2011-11-30")
+
+JOY <- rbind(JOY, JOY1)
+
+usa <- usa[!(usa$name=="JOY GLOBAL INC"),]
+
+usa <- rbind(usa, JOY)
+
+#**VIAB, VIACOM INC CLASS B
+# change to VIA up until 2011-11-30, then leave as is
+VIAB <- filter(usa, name == "VIACOM INC CLASS B")
+VIAB$ticker <- "VIAB"
+VIAB$ticker <- as.factor(VIAB$ticker)
+VIAB$date <- as.Date(VIAB$date)
+
+VIAB1 <- filter(VIAB, date <= "2011-11-30")
+VIAB1$ticker <- "VIA"
+
+VIAB <- filter(VIAB, date > "2011-11-30")
+
+VIAB <- rbind(VIAB, VIAB1)
+
+usa <- usa[!(usa$name=="VIACOM INC CLASS B"),]
+
+usa <- rbind(usa, VIAB)
+
+# ** GOOGL, GOOGLE INC CLASS A
+# change to GOOG until 2014-03-31, then leave it
+GOOGL <- filter(usa, name == "GOOGLE INC CLASS A")
+GOOGL$ticker <- "GOOGL"
+GOOGL$ticker <- as.factor(GOOGL$ticker)
+GOOGL$date <- as.Date(GOOGL$date)
+
+GOOGL1 <- filter(GOOGL, date <= "2014-03-31")
+GOOGL1$ticker <- "GOOG"
+
+GOOGL <- filter(GOOGL, date > "2014-03-31")
+
+GOOGL <- rbind(GOOGL, GOOGL1)
+
+usa <- usa[!(usa$name=="GOOGLE INC CLASS A"),]
+
+usa <- rbind(usa, GOOGL)
+
 
 # Now have updated usa data set with all the tickers
 # need to get the list of unique tickers, and get the WRDS data again
@@ -111,6 +385,135 @@ unique_tickers <- unique(usa$ticker)
 
 new_data <- write.table(unique_tickers, "/Users/johngilheany/downloads/unique_tickers.txt",
 												sep="\t", col.names = FALSE, row.names = FALSE, quote = FALSE)
+
+# We want to compare returns of EUSA with weighted returns from usa data set
+monthly_returns_usa <- select(usa, date, ticker, weight)
+monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
+
+# Get price data from WRDS
+# CRSP Daily Stock Data --> ticker and price data only for unique_tickers.txt
+# c40a80549103a679 <- read_csv("~/Downloads/fa8f8f8f04fe6522.csv")
+# usa_prices <- c40a80549103a679
+colnames(usa_prices) <- c("permco", "date", "ticker", "price")
+usa_prices <- select(usa_prices, date, ticker, price)
+# Some prices are negative for some reason....make positive
+usa_prices$price <- abs(usa_prices$price)
+library(lubridate)
+usa_prices$date <- ymd(usa_prices$date)
+usa_prices$ticker <- as.factor(usa_prices$ticker)
+
+# Extract month end data, instead of daily
+usa_prices <- usa_prices[endpoints(usa_prices$date, on = "months"), ]
+
+# unique tickers
+unique_tickers <- unique(usa$ticker)
+monthly_returns_usa1 <- matrix(ncol=4)
+colnames(monthly_returns_usa1) <- c("date", "ticker", "price", "delta")
+library(quantmod)
+library(dplyr)
+
+# Calculate the delta, change in return (monthly)
+for (n in unique_tickers){
+	# Test file to make sure enough observations are available
+	temp <- filter(usa_prices, ticker == n)
+	temp <- temp[complete.cases(temp),]
+
+	# Calculate the delta, change in return (monthly)
+	if (nrow(temp) > 1){
+		ticker_data <- filter(usa_prices, ticker == n)
+		ticker_data <- select(ticker_data, date, ticker, price)
+		ticker_data <- ticker_data[complete.cases(ticker_data),]
+		ticker_data$delta <- Delt(ticker_data$price)
+		ticker_data <- select(ticker_data, date, ticker, price, delta)
+	}
+	else {
+	}
+
+	monthly_returns_usa1 <- rbind(monthly_returns_usa1, ticker_data)
+	monthly_returns_usa1$date <- as.Date(monthly_returns_usa1$date)
+}
+# Get rid of NA values
+monthly_returns_usa1 <- monthly_returns_usa1 %>% filter(complete.cases(delta))
+
+# Merge with monthly_returns_usa, by date and ticker
+monthly_returns_usa <- merge(monthly_returns_usa, monthly_returns_usa1, by = c("date", "ticker"), all.x = TRUE)
+
+# Arrange by ticker
+monthly_returns_usa <- arrange(monthly_returns_usa, ticker)
+
+# Some duplicate rows
+monthly_returns_usa <- unique(monthly_returns_usa)
+
+# Multiply returns by weight
+monthly_returns_usa$weighted_return <- monthly_returns_usa$weight * monthly_returns_usa$delta
+
+# Some stock splits and other events not acocunted for properly on WRDS. Fixed by hand
+# AAPL on 2014-06-30
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'AAPL' & date == '2014-06-30'] <- -0.02766193)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'AAPL' & date == '2014-06-30'] <- -0.08691378)
+
+# LVLT 2011-10-31 15:1 reverse stock split, month end before is 1.49 * 15 = 22.35 to 26.69 next month
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'LVLT' & date == '2011-10-31'] <- 0.1941834)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'LVLT' & date == '2011-10-31'] <- 0.01638908)
+
+# KO 2012-08-31 2:1 stock split
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'KO' & date == '2012-08-31'] <- -0.0802139)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'KO' & date == '2012-08-31'] <- -0.09214171)
+
+# V 2015-03-31 4:1 stock split from 271.31 on 2015-02-27 to 65.41 (261.64 considering split)
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'V' & date == '2015-03-31'] <- -0.03538107)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'V' & date == '2015-03-31'] <- -0.02368055)
+
+# MA 2014-01-31 10:1 stock split. From 835.46 on 2013-12-31 to 75.68 (756.80 considering split)
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'MA' & date == '2014-01-31'] <- -0.09415172)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'MA' & date == '2014-01-31'] <- -0.04422306)
+
+# NFLX 2015-07-31 7:1 stock split. From 656.9400 on 2015-05-29 to 114.3100 (800.17 with split)
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'NFLX' & date == '2015-07-31'] <- 0.218026)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'NFLX' & date == '2015-07-31'] <- 0.04753534)
+
+# CME 2012-07-31 5:1 stock split. From 268.110 to 52.110 (260.55)
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'CME' & date == '2012-07-31'] <- -0.02819738)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'CME' & date == '2012-07-31'] <- -0.003575428)
+
+# Issue with stock split data. DUK on 2012-07-31. Manually calculated it, and will change delta
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'DUK' & date == '2012-07-31'] <- 0.02023706)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'DUK' & date == '2012-07-31'] <- 0.007443191)
+
+# EVHC 2016-12-30 --> merger with AMSG, took their stock price. Will remove delta and weighted avg values
+monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'EVHC' & date == '2016-12-30'] <- 0)
+monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'EVHC' & date == '2016-12-30'] <- 0)
+
+# Aggregate the returns based on date
+usa_returns <- aggregate(weighted_return ~ date, data=monthly_returns_usa, FUN=sum)
+
+# Get EUSA index return data for dates in returns1 data set
+# get ticker and price from CRSP monthly return data
+# b9278c333f9fa857 <- read_csv("~/Downloads/b9278c333f9fa857")
+# eusa_return <- b9278c333f9fa857
+eusa_return$date <- ymd(eusa_return$date)
+colnames(eusa_return) <- c("id", "date", "ticker", "price")
+# Some price values are negative for some reason --> convert to all positive
+eusa_return$price <- abs(eusa_return$price)
+eusa_return$eusa_return <- Delt(eusa_return$price)
+eusa_return$eusa_return <- eusa_return$eusa_return * 100
+eusa_return <- select(eusa_return, date, eusa_return)
+
+returns1 <- merge(usa_returns, eusa_return, by = "date")
+
+# Remove 2011-10-31 for now, because many NAs
+returns1 <- returns1[!(returns1$date=="2011-10-31"),]
+
+# Plot returns calculated individually vs returns from EUSA index
+df1<-data.frame(x=returns1$date,y=returns1$weighted_return)
+df2<-data.frame(x=returns1$date,y=returns1$eusa_return)
+
+ggplot(returns1, aes(x=weighted_return, y=eusa_return)) +
+	geom_point(shape=1) +  geom_smooth(method=lm)
+
+cor(returns1$eusa_return, returns1$weighted_return)
+
+##########################################
 
 
 # Create backbone of monthly data set --> subset data with
@@ -147,55 +550,3 @@ monthly5 <- merge(monthly4, book_value1, by = c("ticker", "date"), all.x = TRUE)
 monthly5$price_to_book <- monthly5$market_value/monthly5$book_value
 
 -----------------------
-
-# unique tickers
-unique_tickers <- unique(usa$ticker)
-returns <- matrix(ncol=5)
-colnames(returns) <- c("weight", "date", "ticker", "price", "delta")
-
-for (n in unique_tickers){
-	# Test file to make sure enough observations are available
-	temp <- filter(usa, ticker == n)
-	temp <- temp[complete.cases(temp),]
-
-	# Create different datasets by state. Make sure file has at least 252 non NA values
-	if (nrow(temp) > 1){
-		ticker_data <- filter(usa, ticker == n)
-		ticker_data <- select(ticker_data, weight, date, ticker, price)
-		ticker_data <- ticker_data[complete.cases(ticker_data),]
-		ticker_data$delta <- Delt(ticker_data$price)
-		ticker_data <- select(ticker_data, weight, date, ticker, price, delta)
-	}
-	else {
-	}
-
-	returns <- rbind(returns, ticker_data)
-	returns$date <- as.Date(returns$date)
-}
-
-# Multiply returns by weight
-returns$weighted_return <- returns$weight * returns$delta
-# Aggregate the returns based on date
-returns1 <- aggregate(weighted_return ~ date, data=returns1, FUN=sum)
-
-# Get EUSA index return data for dates in returns1 data set
-eusa_return <- b340d740bd26c371
-eusa_return$date <- ymd(eusa_return$date)
-colnames(eusa_return) <- c("id", "date", "ticker", "price")
-eusa_return$eusa_return <- Delt(eusa_return$price)
-eusa_return$eusa_return <- eusa_return$eusa_return * 100
-eusa_return <- select(eusa_return, date, price, eusa_return)
-
-returns1 <- merge(returns1, eusa_return, by = "date")
-
-# One price return is -32.6, which makes no sense. Became negative somehow
-eusa_return[17, 2] = 32.6300
-
-# Plot returns calculated individually vs returns from EUSA index
-df1<-data.frame(x=returns1$date,y=returns1$weighted_return)
-df2<-data.frame(x=returns1$date,y=returns1$eusa_return)
-
-ggplot(df1,aes(x,y))+geom_line(aes(color="Calculated Return"))+
-	geom_line(data=df2,aes(color="EUSA Index Return"))+
-	labs(color="Legend text")
-
