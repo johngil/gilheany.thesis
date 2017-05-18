@@ -79,12 +79,18 @@ usa$ticker[usa$ticker == "NIHDQ"] <- "NIHD"
 usa$ticker[usa$ticker == "PA9"] <- "TRV"
 usa$ticker[usa$ticker == "UPLMQ"] <- "UPL"
 usa$ticker[usa$ticker == "WLTGQ"] <- "WLT"
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 
 # From NYSE/NASDAQ info
 usa$ticker[usa$ticker == "FCX*"] <- "FCX"
 usa$ticker[usa$ticker == "UAC/C"] <- "UA"
 usa$ticker[usa$ticker == "UAA"] <- "UA"
 usa$ticker[usa$ticker == "BF/B"] <- "BF"
+<<<<<<< HEAD
 
 # Additional updates
 usa$ticker[usa$ticker == "VISA"] <- "V"
@@ -95,6 +101,8 @@ usa$ticker[usa$ticker == "AAZ"] <- "APC"
 usa$ticker[usa$ticker == "NCRA"] <- "NWS"
 usa$ticker[usa$ticker == "ANTM"] <- "WLP"
 usa$ticker[usa$ticker == "BRKB"] <- "BRK"
+=======
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 
 # KMI WS is a KINDER MORGAN EQUITY WARRANTS EXP --> removed
 usa <- filter(usa, ticker != "KMI WS")
@@ -123,6 +131,7 @@ WLT <- filter(usa, name == "WALTER ENERGY INC")
 WLT$ticker <- "WLT"
 WLT$ticker <- as.factor(WLT$ticker)
 
+<<<<<<< HEAD
 WPO <- filter(usa, name == "GRAHAM HOLDINGS COMPANY CO CLASS B")
 WPO$ticker <- "WPO"
 WPO$ticker <- as.factor(WPO$ticker)
@@ -145,6 +154,9 @@ BRK$ticker <- as.factor(BRK$ticker)
 
 # Drop NA tickers
 library(tidyquant)
+=======
+# Drop NA tickers
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 usa <- usa %>% drop_na(ticker)
 
 # Rbind X and ANR to usa data set
@@ -154,11 +166,14 @@ usa <- rbind(usa, BF)
 usa <- rbind(usa, NIHD)
 usa <- rbind(usa, UPL)
 usa <- rbind(usa, WLT)
+<<<<<<< HEAD
 usa <- rbind(usa, SAI)
 usa <- rbind(usa, WPO)
 usa <- rbind(usa, ANTM)
 usa <- rbind(usa, WLP)
 usa <- rbind(usa, BRK)
+=======
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 
 usa$ticker <- as.factor(usa$ticker)
 
@@ -168,6 +183,7 @@ usa <- arrange(usa, ticker)
 # Remove ORCHARD SUPPLY HARDWARE STORES tickers (OSHSQ and OSHWQ)
 usa <- usa[-c(26965, 26966), ]
 
+<<<<<<< HEAD
 # usa data set has dates for 2017-01-05. Remove then
 usa <- filter(usa, date != "2017-01-05")
 usa$date <- as.Date(usa$date)
@@ -377,6 +393,8 @@ usa <- usa[!(usa$name=="GOOGLE INC CLASS A"),]
 
 usa <- rbind(usa, GOOGL)
 
+=======
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 
 # Now have updated usa data set with all the tickers
 # need to get the list of unique tickers, and get the WRDS data again
@@ -392,6 +410,7 @@ monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
 
 # Get price data from WRDS
 # CRSP Daily Stock Data --> ticker and price data only for unique_tickers.txt
+<<<<<<< HEAD
 # c40a80549103a679 <- read_csv("~/Downloads/fa8f8f8f04fe6522.csv")
 # usa_prices <- c40a80549103a679
 colnames(usa_prices) <- c("permco", "date", "ticker", "price")
@@ -409,6 +428,24 @@ usa_prices <- usa_prices[endpoints(usa_prices$date, on = "months"), ]
 unique_tickers <- unique(usa$ticker)
 monthly_returns_usa1 <- matrix(ncol=4)
 colnames(monthly_returns_usa1) <- c("date", "ticker", "price", "delta")
+=======
+# fa8f8f8f04fe6522 <- read_csv("~/Downloads/fa8f8f8f04fe6522.csv")
+# usa_prices <- fa8f8f8f04fe6522
+colnames(usa_prices) <- c("permco", "date", "ticker", "price")
+usa_prices <- select(usa_prices, date, ticker, price)
+library(lubridate)
+usa_prices$date <- ymd(usa_prices$date)
+usa_prices$ticker <- as.factor(usa_prices$ticker)
+usa$weight <- as.numeric(usa$weight)
+
+# Merge with monthly_returns_usa, by date and ticker
+monthly_returns_usa <- merge(monthly_returns_usa, usa_prices, by = c("date", "ticker"), all.x = TRUE)
+
+# unique tickers
+unique_tickers <- unique(usa$ticker)
+monthly_returns_usa <- matrix(ncol=5)
+colnames(monthly_returns_usa) <- c("date", "ticker", "weight", "price", "delta")
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 library(quantmod)
 library(dplyr)
 
@@ -420,17 +457,30 @@ for (n in unique_tickers){
 
 	# Calculate the delta, change in return (monthly)
 	if (nrow(temp) > 1){
+<<<<<<< HEAD
 		ticker_data <- filter(usa_prices, ticker == n)
 		ticker_data <- select(ticker_data, date, ticker, price)
 		ticker_data <- ticker_data[complete.cases(ticker_data),]
 		ticker_data$delta <- Delt(ticker_data$price)
 		ticker_data <- select(ticker_data, date, ticker, price, delta)
+=======
+		ticker_data <- filter(usa, ticker == n)
+		ticker_data <- select(ticker_data, date, ticker, weight, price)
+		ticker_data <- ticker_data[complete.cases(ticker_data),]
+		ticker_data$delta <- Delt(ticker_data$price)
+		ticker_data <- select(ticker_data, date, ticker, weight, price, delta)
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 	}
 	else {
 	}
 
+<<<<<<< HEAD
 	monthly_returns_usa1 <- rbind(monthly_returns_usa1, ticker_data)
 	monthly_returns_usa1$date <- as.Date(monthly_returns_usa1$date)
+=======
+	monthly_returns_usa <- rbind(monthly_returns_usa, ticker_data)
+	monthly_returns_usa$date <- as.Date(monthly_returns_usa$date)
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 }
 # Get rid of NA values
 monthly_returns_usa1 <- monthly_returns_usa1 %>% filter(complete.cases(delta))
@@ -444,9 +494,14 @@ monthly_returns_usa <- arrange(monthly_returns_usa, ticker)
 # Some duplicate rows
 monthly_returns_usa <- unique(monthly_returns_usa)
 
+# We get 3216 for some reason? Not entirely sure why, but data seems fine
+# there are some NA values --> remove them
+monthly_returns_usa <- monthly_returns_usa[complete.cases(monthly_returns_usa),]
+
 # Multiply returns by weight
 monthly_returns_usa$weighted_return <- monthly_returns_usa$weight * monthly_returns_usa$delta
 
+<<<<<<< HEAD
 # Some stock splits and other events not acocunted for properly on WRDS. Fixed by hand
 # AAPL on 2014-06-30
 monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'AAPL' & date == '2014-06-30'] <- -0.02766193)
@@ -484,6 +539,8 @@ monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'DU
 monthly_returns_usa <- within(monthly_returns_usa, delta[ticker == 'EVHC' & date == '2016-12-30'] <- 0)
 monthly_returns_usa <- within(monthly_returns_usa, weighted_return[ticker == 'EVHC' & date == '2016-12-30'] <- 0)
 
+=======
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 # Aggregate the returns based on date
 usa_returns <- aggregate(weighted_return ~ date, data=monthly_returns_usa, FUN=sum)
 
@@ -549,4 +606,46 @@ monthly5 <- merge(monthly4, book_value1, by = c("ticker", "date"), all.x = TRUE)
 # and then fill in later
 monthly5$price_to_book <- monthly5$market_value/monthly5$book_value
 
+<<<<<<< HEAD
+=======
+
+
+_____
+
+
+
+# Create backbone of monthly data set --> subset data with
+monthly1 <- select(usa, ticker, date)
+monthly1$date <- as.Date(monthly1$date)
+monthly_beta_values$ticker <- as.factor(monthly_beta_values$ticker)
+
+# Fill in values for vol, beta --> keep monthly1 same, and fill in with beta values from other data set
+colnames(monthly_beta_values) <- c("date", "ticker", "beta")
+monthly2 <- merge(monthly1, monthly_beta_values, by = c("ticker", "date"), all.x = TRUE)
+monthly3 <- merge(monthly2, final_rolling_vol, by = c("ticker", "date"), all.x = TRUE)
+
+# Fill in for P/B. Lag 3 months
+book_value_data <- select(book_value_data, datadate, tic, at, lt, bkvlps, csho, mkvalt, prcc_f)
+colnames(book_value_data) <- c("date", "ticker", "total_assets", "total_liabilities", "book_value_per_share", "shares_outstanding", "market_value", "stock_price")
+book_value_data$date <- ymd(book_value_data$date)
+# Put in market cap values for dates given, and fill in the remaining values
+market_cap <- select(book_value_data, date, ticker, market_value)
+monthly4 <- merge(monthly3, market_cap, by = c("ticker", "date"), all.x = TRUE)
+monthly4 <- monthly4 %>% fill(market_value)
+# Put in book values for dates given, then lag them 3 months
+# monthly1 has all the dates and tickers we are looking for
+book_value <- select(book_value_data, date, ticker, book_value)
+book_value1 <- merge(monthly1, book_value, by = c("ticker", "date"), all.x = TRUE)
+# Do the following 3x for a 3 month lag
+book_value1$book_value <- lag(book_value1$book_value)
+# Can't really just blindly lag them.....need to do a loop where you are doing it individually
+# But for now this is good enough -- will look at the rest later
+book_value1 <- book_value1 %>% fill(book_value)
+# merge book_value data with other monthly data
+monthly5 <- merge(monthly4, book_value1, by = c("ticker", "date"), all.x = TRUE)
+# Issue with filling in values of NAs that did not have --> could remove NA values first
+# and then fill in later
+monthly5$price_to_book <- monthly5$market_value/monthly5$book_value
+
+>>>>>>> 0b8634a3a06b07aa6eb54a507f80da22fa917973
 -----------------------
