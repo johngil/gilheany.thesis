@@ -11,27 +11,7 @@ However, after having a quick overview of the data, there were many issues with 
 
 Instead of looking through 800+ tickers at once, I created a subset of the usa data that looked at all of the companies not listed on the NYSE or NASDAQ exchanges. This included stocks listed on the Boerse Berlin, Bolsa Mexicana De Valores, and London Stock Exchange. There were 16 exchanges that were not the NYSE or NASDAQ, which seemed problematic. There were 74 tickers within these, that I went through and looked at by hand. These included many tickers with numbers and asterisks. In the end, I was able to figure out 67 of these tickers pretty definitively. Some of these tickers were recorded properly, just with the wrong exchange listed (i.e. F, Ford, listed on the Swiss Exchange). Thus, these tickers were kept as is. Some other tickers were harder to find because of M&A activity causing the company to no longer be traded. One example was LinkedIn, which was incorrectly listed as LKI. Before it was acquired by Microsoft, the ticker was LNKD. Thus, the ticker was changed to show this, as we will need to get old data for companies based off their tickers at the time. Other tickers were for US companies, and included their tickers for overseas exchanges. One example was Intel Corp, which was listed as INCO. INCO is the correct ticker for Intel on the Amsterdam exchange, but not on the NYSE, which lists it as INTC. The general methodology to make sure a change in ticker was appropriate was to check the price of the stock at a specific date, in the usa data set, and then comparing it to the new ticker I was going to assign it. If the price matched, the change was made. If the price did not match up and was very different, then I looked to see if a stock-split might be the cause of this. If there was no evidence of a stock-split, then the stock was highlighted and left alone for further analysis. An entire list of what was changed and what was not is shown in the appendix. In the end, the ticker named “1015736” and Orchard Supply Hardware Stores were removed from the data set. This accounted for less than 0.2% of the data from one month-end date. I also removed cash assets as well by removing values if the sector was cash, since this is not important for our purposes. 
 
-Thus, after removing a couple tickers and cash, I wanted to check how accurate the data set was. This was accomplished by comparing the weighted returns of the constructed index we have (looking at each constituent’s monthly return, multiplied by its weight), and comparing it to the ETF return. Because the iShares price data did not reflect stock splits, it was very problematic in some returns. For example, when AAPL split its stock in 2014, from 4-30-2014 to 5-30-2014, the price went from $633.00 to $92.93 per share. This would have been improperly recorded as an 85% decrease in the price of the stock, when in reality this was due to a stock split. Since WRDS generally gives price information adjusted for stock splits and dividends, those prices were used instead. However, this was not always the case, and for some instances, these issues were changed manually. This was done by sorting the highest deltas in the data set, with delta corresponding to the monthly change in stock price. I investigated stocks with deltas greater than 0.3 in magnitude for the given month to see if it needed to be adjusted. This same procedure was used for the minvol data set, as it is a subset of the usa data. 
-
-Shown below are some of the summary statistics of the usa and min vol data
-```{r}
-# Load Packages and View the Data
-devtools::install_github("johngil/gilheany.thesis")
-library(mscidata)
-library(ggplot2)
-data(usa)
-data(minvol)
-
-## Summary statistics of EUSA Data
-head(usa)
-tail(usa)
-summary(usa)
-
-## Summary statistics of USMV Data
-head(minvol)
-tail(minvol)
-summary(minvol)
-```
+Thus, after removing a couple tickers and cash, I wanted to check how accurate the data set was. This was accomplished by comparing the weighted returns of the constructed index we have (looking at each constituent’s monthly return, multiplied by its weight), and comparing it to the ETF return. Because the iShares price data did not reflect stock splits, it was very problematic in some returns. For example, when AAPL split its stock in 2014, from 4-30-2014 to 5-30-2014, the price went from $633.00 to $92.93 per share. This would have been improperly recorded as an 85% decrease in the price of the stock, when in reality this was due to a stock split. Since WRDS generally gives price information adjusted for stock splits and dividends, those prices were used instead. However, this was not always the case, and for some instances, these issues were changed manually. This was done by sorting the highest deltas in the data set, with delta corresponding to the monthly change in stock price. I investigated stocks with deltas greater than 0.3 in magnitude for the given month to see if it needed to be adjusted. This same procedure was used for the minvol data set, as it is a subset of the usa data. It is available on the package as usa and minvol. 
 
 Before taking the data as given, some checks were done to ensure the data was accruate. First, we wanted to check how our weighted returns compared to the ETF returns. Though we did not expect it to be perfectly correlated, we wanted to aim for a 98% or higher correlation between the weighted returns we calculated, and the ETF returns, on a monthly basis. The results for the usa data are shown below.
 
@@ -45,6 +25,7 @@ kable(returns1, caption = "USA Returns")
 # USA data
 data(returns1)
 summary(returns1)
+library(ggplot2)
 ggplot(returns1, aes(x=weighted_return, y=eusa_return)) + geom_point(shape=1) +  geom_smooth(method=lm)
 
 cor(returns1$eusa_return, returns1$weighted_return)
@@ -68,4 +49,4 @@ ggplot(returns2, aes(x=weighted_return, y=eminvol_return)) +
 
 cor(returns2$eminvol_return, returns2$weighted_return)
 ```
-
+The correlation is 0.99, which is also quite good. 
