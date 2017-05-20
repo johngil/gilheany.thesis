@@ -17,6 +17,8 @@ sum(is.na(MSCI$minvol.weight))
 # Make na values in minvol.weight equal to 0
 MSCI[is.na(MSCI)] <- 0.0000
 
+# Reorder columns
+MSCI <- MSCI[c(1,2,3,5,4,6)]
 
 
 
