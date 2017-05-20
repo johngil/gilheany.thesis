@@ -5,48 +5,90 @@ output:
 ---
 # Data Collection and Summary Statistics
 
-Data was downloaded from www.ishares.com for EUSA (iShares MSCI USA Equal Weighted ETF) and USMV (iShares Edge MSCI Min Vol USA ETF), from Oct 31, 2011 to December 31, 2016. iShares are a type of ETF managed by BlackRock, and www.ishares.com contains the month end data for the two ETFs of interest in this dissertation. The data sets included information for the constituents of each ETF of the time, and some other characteristics of them, including: ticker, company name, asset class, weight of the stock relative to the entire index, price per share, number of shares, market value of the position, notional value of the position, sector, sedol number, isin number, exchange that the stock is listed on, and the month end date for the data. An R function was created for both ETFs that would combine each month end data set into one aggregated one. Thus, each month end data set was individually downloaded, then aggregated to create the data sets “usa” and “minvol”. These were stored in the data-raw folder, for safekeeping. 
+## EUSA and USMV Data Compilation
+Data was downloaded from www.ishares.com for EUSA (iShares MSCI USA Equal Weighted ETF) and USMV (iShares Edge MSCI Min Vol USA ETF), from Oct 31, 2011 to December 31, 2016. iShares are a type of ETF managed by BlackRock, and www.ishares.com contains the month end data for the two ETFs of interest in this dissertation. The data sets included information for the constituents of each ETF for a period in time, and some other characteristics of them, including: ticker, company name, asset class, weight of the stock relative to the entire index, price per share, number of shares, market value of the position, notional value of the position, sector, sedol number, isin number, exchange that the stock is listed on, and the month end date for the data. On the website, iShares had data for the positions and constituents of each ETF, for the last trading day of every month. Thus, an R function was created, one for each ETF, that would combine each month end data set into one aggregated one. Thus, each month end data set was individually downloaded, then aggregated to create the data sets “usa” and “minvol”. These were stored in the data-raw folder, for safekeeping. 
 
-However, after having a quick overview of the data, there were many issues with it that needed to be fixed before the analysis could begin. First, looking at unique exchanges of the data on R, it was seen that there were many foreign exchanges like the Swiss Exchange and the Mexican Exchange, which did not make sense, given the ETF constituents are supposed to be listed on US-based exchanges. One clear discrepancy between the company name and ticker was “AAPL*” (yes, the ticker had an asterisk) which was listed on the Mexican Exchange, instead of being listed as AAPL on the NYSE. This would cause issues for reading the data later on, because AAPL with the asterisk was not read in as "AAPL" due to the asterisk. Other tickers were very easy to notice as incorrect because they included numbers. Seeing as this is a US index with US stocks, this was a clear issue. One example was the company Aflac, Inc. which was recorded by the ticker 8686. This corresponded to Aflac, Inc. on the Tokyo exchange, but when checking the recorded price of the stock for corresponding dates, it matched up with the Aflac, Inc. stock in the US, with ticker AFL. Other tickers were read in correctly, but corresponded to non-US exchanges. One example was BAC, Bank of America, which is listed on the NYSE. Though the price for each date corresponded to the price of BAC in the NYSE, it was listed on the Swiss Exchange. BAC did not correspond to Bank of America on the Swiss Exchange either, which made me question how these companies were being read in. 
+## EUSA and USMV Data Cleaning
+I began the data cleaning process by removing cash and cash related assets, since this is not important for our purposes. After having a quick overview of the data, there were many issues with each respective data set that needed to be fixed before the analysis could begin. As USMV is a subset of EUSA, the issues were very similar, and those that existed in USMV, generally existed in USMV as well. The issues could be broke down into 3 main types.
+ 
+### Non-US Exchanges
+First, looking at unique exchanges of the data on R, it was seen that there were many foreign exchanges like the Swiss Exchange and the Mexican Exchange, which did not make sense, given the ETF constituents are supposed to be listed on US-based exchanges. These could be broke up into two more groups: companies that were incorretly listed overseas and are actually listed on US exchanges, and companies that also are actually listed on US exchanges but instead had their overseas exchange tickers listed. 
 
-Instead of looking through 800+ tickers at once, I created a subset of the usa data that looked at all of the companies not listed on the NYSE or NASDAQ exchanges. This included stocks listed on the Boerse Berlin, Bolsa Mexicana De Valores, and London Stock Exchange. There were 16 exchanges that were not the NYSE or NASDAQ, which seemed problematic. There were 74 tickers within these, that I went through and looked at by hand. These included many tickers with numbers and asterisks. In the end, I was able to figure out 67 of these tickers pretty definitively. Some of these tickers were recorded properly, just with the wrong exchange listed (i.e. F, Ford, listed on the Swiss Exchange). Thus, these tickers were kept as is. Some other tickers were harder to find because of M&A activity causing the company to no longer be traded. One example was LinkedIn, which was incorrectly listed as LKI. Before it was acquired by Microsoft, the ticker was LNKD. Thus, the ticker was changed to show this, as we will need to get old data for companies based off their tickers at the time. Other tickers were for US companies, and included their tickers for overseas exchanges. One example was Intel Corp, which was listed as INCO. INCO is the correct ticker for Intel on the Amsterdam exchange, but not on the NYSE, which lists it as INTC. The general methodology to make sure a change in ticker was appropriate was to check the price of the stock at a specific date, in the usa data set, and then comparing it to the new ticker I was going to assign it. If the price matched, the change was made. If the price did not match up and was very different, then I looked to see if a stock-split might be the cause of this. If there was no evidence of a stock-split, then the stock was highlighted and left alone for further analysis. An entire list of what was changed and what was not is shown in the appendix. In the end, the ticker named “1015736” and Orchard Supply Hardware Stores were removed from the data set. This accounted for less than 0.2% of the data from one month-end date. I also removed cash assets as well by removing values if the sector was cash, since this is not important for our purposes. 
+The first type of error was from companies that were listed on either the NYSE and NASDAQ, but were curiously listed on an foreign exchange instead, but had their US ticker used. One example was BAC, Bank of America, which is listed on the NYSE, but was listed on the Swiss Stock Exchange in the data set. The price for BAC in the data set corresponded to the price of BAC in the NYSE, although it was listed on the Swiss Exchange. Moreover, I checked to see if BAC corresponded to Bank of America on the Swiss Exchange, and it did not. Thus, after several checks, I was able to conclude that BAC in the dtaa set was incorrectly listed on the Swiss Exchange, and should have been listed on the NYSE instead. Since the ticker would still be able to be read into WRDS, these cases were left as is.   
 
-Thus, after removing a couple tickers and cash, I wanted to check how accurate the data set was. This was accomplished by comparing the weighted returns of the constructed index we have (looking at each constituent’s monthly return, multiplied by its weight), and comparing it to the ETF return. Because the iShares price data did not reflect stock splits, it was very problematic in some returns. For example, when AAPL split its stock in 2014, from 4-30-2014 to 5-30-2014, the price went from $633.00 to $92.93 per share. This would have been improperly recorded as an 85% decrease in the price of the stock, when in reality this was due to a stock split. Since WRDS generally gives price information adjusted for stock splits and dividends, those prices were used instead. However, this was not always the case, and for some instances, these issues were changed manually. This was done by sorting the highest deltas in the data set, with delta corresponding to the monthly change in stock price. I investigated stocks with deltas greater than 0.3 in magnitude for the given month to see if it needed to be adjusted. This same procedure was used for the minvol data set, as it is a subset of the usa data. It is available on the package as usa and minvol. 
+The next type of error was from companies listed on foreign exchanges that are listed on a US exchange as well, but their non-US ticker used. One example of this was Aflac, Inc. which was listed by its ticker "8686" on the Tokyo stock exchange. This was immediately a red flag due to the numbers in the ticker. This numeric ticker corresponded to Aflac, Inc. on the Tokyo exchange, but when checking the recorded price of the stock for corresponding dates, it matched up with the Aflac, Inc. stock on the NYSE, with ticker "AFL". Thus, when this happened, each company was treated on a case by case basis. In this case, since the stock price corresponded to AFL, the ticker name was changed from "8686" to "AFL". This would ensure the data could be properly read in from WRDS. 
 
-Before taking the data as given, some checks were done to ensure the data was accruate. First, we wanted to check how our weighted returns compared to the ETF returns. Though we did not expect it to be perfectly correlated, we wanted to aim for a 98% or higher correlation between the weighted returns we calculated, and the ETF returns, on a monthly basis. The results for the usa data are shown below.
+Overall, even with these numerous errors, it was a good sign because it implied that the data was generally correct (no internationally listed companies), but just recorded incorrectly. Thus, after making these changes, it was safe to assume the data was for the most part accurate.
 
-```{r echo = FALSE, results = 'asis'}
-library(knitr)
-data("returns1")
-kable(returns1, caption = "USA Returns")
+### Unrecognized Tickers
+Another general type of error was when the ticker was not read into WRDS, causing all the prices for that ticker and company to be NA. This was evaluated, once again, on a case by case basis, by observing which tickers WRDS did not recognize, and looking at the company name to understand why. Sometimes, the issue was very obvious. One example of a clear discrepancy was when the ticker had an asterisk at the end of it. After careful digging, the asterisk did not seem to mean anything, and it is unclear why some tickers contained it. One example was “AAPL*”. This caused issues for reading the data in from WRDS, because that ticker was not read in as "AAPL" due to the asterisk. 
+
+Another example of the ticker not being read in properly was when it contained numbers. Alflac was an example that was mentioned previously, but another one that applied here was "AG4" which was the ticker for Allergan Since NYSE and NASDAQ tickers do not contain numbers, this was a clear red flag. After some research, it appeared AG4 is the ticker for Allergan on the  Deutsche Boerse AG Stock Exchange. However, the prices corresponded to Allergan's on the NYSE. Thus, this change in ticker was made. Overall, though each category is unique, there has been a lot of overlap, and often times correcting one type of error would fix other errors too. For example here, many tickers that include numbers will not be read in, and this is usually because the ticker corresponds with the same company but on a foreign exchange. 
+
+### Price Discrepancies
+The general methodology to make sure a change in ticker was appropriate was to check the price of the stock at a specific date, in the usa data set, and then comparing it to the new ticker I was going to assign it. If the price matched, the change was made. If the price did not match up and was very different, then I looked to see if a stock-split might be the cause of this. If there was no evidence of a stock-split, then the stock further analyzed to see what the issue was. In addition to looking and when prices did not match up with tickers and companies for certain dates, monthly returns were calculated for each stock during the times they were in the index, and any abnormal returns (magnitude greater than 30%) were look at manually. One example of this was Netflix's stock 7:1 stock split in 2015. The monthly data showed a price of 656.94 on 2015-05-29 to a price of 114.31 on 2015-07-31, just one month later. This amounts to recorded loss of 82.5%. Since this surpassed the threshold set, it was look at in more detail. After some research, it was shown there was in fact a 7:1 stock split, so the price of the stock on 2015-07-31 was adjusted to 800.17, and the appropriate calculations were done. Thus in this case, the ticker was left alone, but just the price was adjusted. 
+
+Tickers that could not be determined were removed. In the end, the ticker named “1015736” and Orchard Supply Hardware Stores were removed from the data set. These together accounted for less than 0.2% of the data from one month-end date.
+
+## EUSA and USMV Data Overview 
+To get a sense of the EUSA data, summary statistics are shown below:
+```{r, echo = FALSE}
+data(usa)
+summary(usa)
 ```
 
-```{r}
-# USA data
-data(returns1)
-summary(returns1)
-library(ggplot2)
-ggplot(returns1, aes(x=weighted_return, y=eusa_return)) + geom_point(shape=1) +  geom_smooth(method=lm)
+To get a sense of the USMV data, summary statistics are shown below:
+```{r, echo = FALSE}
+data(minvol)
+summary(minvol)
+```
 
+## EUSA and USMV Data Check
+### Weights
+Thus, after cleaning all the data, I wanted to check how accurate the data set actually was. First, the total monthly weights for EUSA and USMV were plotted over time. Since cash and a few tickers were removed, it was not expected for the ticker weights to add up to 1 each month, but something very close to 1 was expected. The monthly change in weights for EUSA is shown below.
+
+```{r, echo = FALSE}
+library(ggplot2)
+data(usa)
+usa_weight1 <- aggregate(weight ~ date, data=usa, FUN=sum)
+summary(usa_weight1)
+ggplot(usa_weight1) + geom_point(aes(date, weight)) + ggtitle("Sum of EUSA Weights")
+```
+
+As we can see in the scatterplor above for EUSA, the weights are very close to 100%, generally within 0.2%. The minimum weight is 99.54%, while the largest weight is 100.21%. The mean weight is 99.79%. The monthly change in weights for USMV is shown below.
+
+```{r, echo = FALSE}
+library(ggplot2)
+data(usa)
+usa_weight2 <- aggregate(weight ~ date, data=minvol, FUN=sum)
+summary(usa_weight2)
+ggplot(usa_weight2) + geom_point(aes(date, weight)) + ggtitle("Sum of USMV Weights")
+```
+
+As we can see in the scatterplor above, the weights for USMV are very close to 100%, and no value exceeds 100%. The minimum weight is 99.58%, while the largest weight is 99.99%. The mean weight is 99.76%. Overall, these look pretty solid and imply the data is trustable.
+
+### Comparing actual ETF returns to constructed ETF returns for EUSA and USMV
+Before taking the data as accurate, though, some checks were done first. This was accomplished by comparing the weighted returns of the constructed index we had for our data (looking at each constituent’s monthly return, multiplied by its weight), and comparing it to the actual ETF return. Thus, we wanted to check how our weighted returns compared to the ETF returns for both EUSA and USMV. Though we did not expect it to be perfectly correlated, we wanted to aim for at least a 98% or higher correlation between the weighted returns we calculated, and the ETF returns, on a monthly basis. The results for EUSA are shown below.
+
+```{r, echo = FALSE}
+data(returns1)
+library(ggplot2)
+# EUSA returns vs. EUSA constructed weighted returns
+ggplot(returns1, aes(x=weighted_return, y=eusa_return)) + geom_point(shape=1) +  geom_smooth(method=lm) + ggtitle("EUSA returns vs. EUSA constructed weighted returns")
+
+# Correlation between EUSA returns and EUSA constructed weighted returns
 cor(returns1$eusa_return, returns1$weighted_return)
 ```
 As we can see, the returns seem pretty consistent and have a correlation greater than 0.98.
 
-Shown below is the data for the min vol index. 
-```{r echo = FALSE, results = 'asis'}
-library(knitr)
-data("returns2")
-kable(returns2, caption = "Min Vol Returns")
-```
-
-```{r}
+Shown below is the data for USMV. 
+```{r, echo = FALSE}
 # USA data
 data(returns2)
-summary(returns2)
-
 ggplot(returns2, aes(x=weighted_return, y=eminvol_return)) +
-	geom_point(shape=1) +  geom_smooth(method=lm)
+	geom_point(shape=1) +  geom_smooth(method=lm) + ggtitle("USMV returns vs. USMV constructed weighted returns")
 
+# Correlation between USMV returns and USMV constructed weighted returns
 cor(returns2$eminvol_return, returns2$weighted_return)
 ```
-The correlation is 0.99, which is also quite good. 
+The correlation is 0.99, which is also very good. 
