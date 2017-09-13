@@ -59,7 +59,7 @@ As we can see in the scatterplor above for EUSA, the weights are very close to 1
 
 ```{r, echo = FALSE}
 library(ggplot2)
-data(usa)
+data(minvol)
 usa_weight2 <- aggregate(weight ~ date, data=minvol, FUN=sum)
 summary(usa_weight2)
 ggplot(usa_weight2) + geom_point(aes(date, weight)) + ggtitle("Sum of USMV Weights")

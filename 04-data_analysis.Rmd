@@ -138,7 +138,7 @@ tail(monthly_beta_values)
 summary(monthly_beta_values)
 
 # Spaggeti plot for monthly Beta
-ggplot(monthly_beta_values, aes(Date, Beta, group = Ticker)) + geom_line()
+ggplot(monthly_beta_values, aes(date, beta, group = ticker)) + geom_line()
 ```
 
 ## EUSA Constituent Price to Book Ratios 
