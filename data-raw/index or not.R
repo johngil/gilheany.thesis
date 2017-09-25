@@ -16,7 +16,7 @@ monthly_test1$binary[monthly_test1$weight!=0] <- 1
 monthly_test1$binary <- factor(monthly_test1$binary)
 
 #building the logit model
-mylogit <- glm(binary ~  beta + volatility + market_value, market_value, data = monthly_test1, family = "binomial")
+mylogit <- glm(binary ~  beta + volatility + market_value + price_to_book, data = monthly_test1, family = "binomial")
 summary(mylogit)
 confint(mylogit)
 

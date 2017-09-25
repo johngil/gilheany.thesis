@@ -1,0 +1,26 @@
+---
+title: "06-Conclusion"
+author: "John Gilheany"
+date: "9/13/2017"
+output: html_document
+---
+
+# Conclusion  
+- Will discuss the different models, and what they each mean, then chose the best one that is most representative of the data that I believe will have the highest predictive power. 
+
+## Model 1: Entire Data Set 
+- Looking at the z-statistics, volatility and beta are statistically significant, while price to book is not, at an alpha level of 0.05.
+- For every one unit change in the beta, the log odds of being in the min vol index decrease by 1.92. 
+- The odds ratio for beta is 0.15.
+- For every one unit change in the vol, the log odds of being in the min vol index decrease by 0.025. 
+- The odds ratio for vol is 0.98.
+- For every one unit change in the price to book, the log odds of being in the min vol index decrease by 0.00036. 
+- The odds ratio for beta is 0.99.
+
+## Model 2: Monthly
+
+## Model 3: Panel Regression
+
+# Discussion
+After comparing all of the models....
+
