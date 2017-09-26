@@ -26,7 +26,7 @@ monthly_test2 <-
 monthly_final <- monthly_test2
 
 #building the logit model
-mylogit <- glm(binary ~  beta + volatility + market_value + price_to_book, data = monthly_test1, family = "binomial")
+mylogit <- glm(index_now ~  volatility + beta + price_to_book + index_before, data = monthly_final, family = "binomial")
 summary(mylogit)
 confint(mylogit)
 

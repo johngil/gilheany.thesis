@@ -10,31 +10,34 @@ Once the final data set was created and cleaned, with a number of response varia
 
 A snippet of the final data set is shown below
 ```{r}
-data(monthly_test1)
-head(monthly_test1)
+data(monthly_final)
+head(monthly_final)
 
-tail(monthly_test1)
+tail(monthly_final)
 
-summary(monthly_test1)
+summary(monthly_final)
 ```
 
 Given the data, a logit regression was run on the entire pool of data. Looking at all of the historical data and stock various characteristics, this would model the log odds of a stock being in the minimum volatility index as a combination of the linear predictors mentioned. Several models will be run in a panel, including one by month, and one by the entire pool of data.
 
-## Model 1: Entire Data Set
+## Model 1: Entire Data Set (Monthly)
 The first logit model that will be run is for the entire pool of data. 
 ```{r}
 # Model 1
-logit1 <- glm(binary ~  beta + volatility + price_to_book, data = monthly_test1, family = "binomial")
-
+logit1 <- glm(index_now ~  volatility + beta + price_to_book + index_before, data = monthly_final, family = "binomial")
 # Summary of Model 1
 summary(logit1)
 
 # Coefficient Interpretation
 exp(coef(logit1))
 
-# Confidence interval of variavle
+# Confidence interval of variable
 confint.default(logit1)
 ``` 
+
+Looking at the monthly data is not a true representation of the results, because th index is rebalanced once every six months - not once a month. 
+
+
 
 ## Model 2: Monthly
 
