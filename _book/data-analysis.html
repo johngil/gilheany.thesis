@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Thesis</title>
+  <meta name="description" content="Thesis stuff">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Thesis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Thesis stuff" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Thesis" />
+  
+  <meta name="twitter:description" content="Thesis stuff" />
+  
+
+<meta name="author" content="John Gilheany">
+
+
+<meta name="date" content="2017-09-27">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-collection-and-summary-statistics.html">
+<link rel="next" href="model.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Opening Comments</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>3</b> Literature Review</a><ul>
+<li class="chapter" data-level="3.1" data-path="literature-review.html"><a href="literature-review.html#high-returns-from-low-risk-by-pim-van-vliet-and-jan-de-koning"><i class="fa fa-check"></i><b>3.1</b> High Returns from Low Risk By Pim van Vliet and Jan De Koning</a></li>
+<li class="chapter" data-level="3.2" data-path="literature-review.html"><a href="literature-review.html#betting-against-correlation-testing-theories-of-the-low-risk-effect"><i class="fa fa-check"></i><b>3.2</b> Betting Against Correlation: Testing Theories of the Low-Risk Effect</a></li>
+<li class="chapter" data-level="3.3" data-path="literature-review.html"><a href="literature-review.html#price-response-to-factor-index-additions-and-deletions"><i class="fa fa-check"></i><b>3.3</b> Price Response to Factor Index Additions and Deletions</a></li>
+<li class="chapter" data-level="3.4" data-path="literature-review.html"><a href="literature-review.html#benchmarks-as-limits-to-arbitrage-understanding-the-low-volatility-anomaly"><i class="fa fa-check"></i><b>3.4</b> Benchmarks as Limits to Arbitrage: Understanding the Low-Volatility Anomaly</a></li>
+<li class="chapter" data-level="3.5" data-path="literature-review.html"><a href="literature-review.html#betting-against-beta"><i class="fa fa-check"></i><b>3.5</b> Betting Against Beta</a></li>
+<li class="chapter" data-level="3.6" data-path="literature-review.html"><a href="literature-review.html#the-low-risk-anomaly-a-decomposition-into-micro-and-macro-effects"><i class="fa fa-check"></i><b>3.6</b> The Low-Risk Anomaly: A Decomposition into Micro and Macro Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html"><i class="fa fa-check"></i><b>4</b> Data Collection and Summary Statistics</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#eusa-and-usmv-data-compilation"><i class="fa fa-check"></i><b>4.1</b> EUSA and USMV Data Compilation</a></li>
+<li class="chapter" data-level="4.2" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#eusa-and-usmv-data-cleaning"><i class="fa fa-check"></i><b>4.2</b> EUSA and USMV Data Cleaning</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#non-us-exchanges"><i class="fa fa-check"></i><b>4.2.1</b> Non-US Exchanges</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#unrecognized-tickers"><i class="fa fa-check"></i><b>4.2.2</b> Unrecognized Tickers</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#price-discrepancies"><i class="fa fa-check"></i><b>4.2.3</b> Price Discrepancies</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#eusa-and-usmv-data-overview"><i class="fa fa-check"></i><b>4.3</b> EUSA and USMV Data Overview</a></li>
+<li class="chapter" data-level="4.4" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#eusa-and-usmv-data-check"><i class="fa fa-check"></i><b>4.4</b> EUSA and USMV Data Check</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#weights"><i class="fa fa-check"></i><b>4.4.1</b> Weights</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#comparing-actual-etf-returns-to-constructed-etf-returns-for-eusa-and-usmv"><i class="fa fa-check"></i><b>4.4.2</b> Comparing actual ETF returns to constructed ETF returns for EUSA and USMV</a></li>
+<li class="chapter" data-level="4.4.3" data-path="data-collection-and-summary-statistics.html"><a href="data-collection-and-summary-statistics.html#change-in-5-largest-holdings-by-average-weight-for-eusa-and-usmv"><i class="fa fa-check"></i><b>4.4.3</b> Change in 5 largest holdings by average weight for EUSA and USMV</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-analysis.html"><a href="data-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-analysis.html"><a href="data-analysis.html#sector-weights"><i class="fa fa-check"></i><b>5.1</b> Sector Weights</a></li>
+<li class="chapter" data-level="5.2" data-path="data-analysis.html"><a href="data-analysis.html#eusa-constituent-trailing-volatilities"><i class="fa fa-check"></i><b>5.2</b> EUSA Constituent Trailing Volatilities</a></li>
+<li class="chapter" data-level="5.3" data-path="data-analysis.html"><a href="data-analysis.html#eusa-constituent-trailing-betas"><i class="fa fa-check"></i><b>5.3</b> EUSA Constituent Trailing Betas</a></li>
+<li class="chapter" data-level="5.4" data-path="data-analysis.html"><a href="data-analysis.html#eusa-constituent-price-to-book-ratios"><i class="fa fa-check"></i><b>5.4</b> EUSA Constituent Price to Book Ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>6</b> Model</a><ul>
+<li class="chapter" data-level="6.1" data-path="model.html"><a href="model.html#model-1-entire-data-set-monthly"><i class="fa fa-check"></i><b>6.1</b> Model 1: Entire Data Set (Monthly)</a></li>
+<li class="chapter" data-level="6.2" data-path="model.html"><a href="model.html#model-2-monthly"><i class="fa fa-check"></i><b>6.2</b> Model 2: Monthly</a></li>
+<li class="chapter" data-level="6.3" data-path="model.html"><a href="model.html#model-3-panel-regression"><i class="fa fa-check"></i><b>6.3</b> Model 3: Panel Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a><ul>
+<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#model-1-entire-data-set"><i class="fa fa-check"></i><b>7.1</b> Model 1: Entire Data Set</a></li>
+<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#model-2-monthly-1"><i class="fa fa-check"></i><b>7.2</b> Model 2: Monthly</a></li>
+<li class="chapter" data-level="7.3" data-path="conclusion.html"><a href="conclusion.html#model-3-panel-regression-1"><i class="fa fa-check"></i><b>7.3</b> Model 3: Panel Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>8</b> Discussion</a></li>
+<li class="chapter" data-level="9" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>9</b> Bibliography</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Thesis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-analysis" class="section level1">
+<h1><span class="header-section-number">5</span> Data Analysis</h1>
+<div id="sector-weights" class="section level2">
+<h2><span class="header-section-number">5.1</span> Sector Weights</h2>
+<p>First, sector weights were calculated over time for both EUSA and USMV. Plots were made by sector and displayed to compare the relative weights of EUSA and USMV.</p>
+<p><em>Sector Weight Summary Statistics:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(usa_percent)</code></pre></div>
+<pre><code>## Warning in data(usa_percent): data set &#39;usa_percent&#39; not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(minvol_percent)</code></pre></div>
+<pre><code>## Warning in data(minvol_percent): data set &#39;minvol_percent&#39; not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Summary statistics of EUSA sector weights
+<span class="kw">head</span>(usa_percent)</code></pre></div>
+<pre><code>##               sector_name sector_count total     percent       date
+## 1 Cash and/or Derivatives            2   631 0.003169572 2017-01-05
+## 2  Consumer Discretionary          106   631 0.167987322 2017-01-05
+## 3        Consumer Staples           43   631 0.068145800 2017-01-05
+## 4                  Energy           44   631 0.069730586 2017-01-05
+## 5              Financials           84   631 0.133122029 2017-01-05
+## 6             Health Care           71   631 0.112519810 2017-01-05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(usa_percent)</code></pre></div>
+<pre><code>##                sector_name sector_count total     percent       date
+## 827 Information Technology           79   585 0.135042735 2011-10-31
+## 828              Materials           33   585 0.056410256 2011-10-31
+## 829            Real Estate            0   585 0.000000000 2011-10-31
+## 830         S-T Securities            1   585 0.001709402 2011-10-31
+## 831     Telecommunications           12   585 0.020512821 2011-10-31
+## 832              Utilities           35   585 0.059829060 2011-10-31</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(usa_percent)</code></pre></div>
+<pre><code>##                   sector_name  sector_count          total          
+##  Cash and/or Derivatives: 64   Length:832         Length:832        
+##  Consumer Discretionary : 64   Class :character   Class :character  
+##  Consumer Staples       : 64   Mode  :character   Mode  :character  
+##  Energy                 : 64                                        
+##  Financials             : 64                                        
+##  Health Care            : 64                                        
+##  (Other)                :448                                        
+##     percent             date           
+##  Min.   :0.00000   Min.   :2011-10-31  
+##  1st Qu.:0.01426   1st Qu.:2013-02-21  
+##  Median :0.06820   Median :2014-06-14  
+##  Mean   :0.07692   Mean   :2014-06-14  
+##  3rd Qu.:0.12236   3rd Qu.:2015-10-07  
+##  Max.   :0.19293   Max.   :2017-01-05  
+## </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Summary statistics of USMV sector weights
+<span class="kw">head</span>(minvol_percent)</code></pre></div>
+<pre><code>##               sector_name sector_count total    percent       date
+## 1 Cash and/or Derivatives            2   186 0.01075269 2017-01-05
+## 2  Consumer Discretionary           18   186 0.09677419 2017-01-05
+## 3        Consumer Staples           24   186 0.12903226 2017-01-05
+## 4                  Energy            4   186 0.02150538 2017-01-05
+## 5              Financials           21   186 0.11290323 2017-01-05
+## 6             Health Care           33   186 0.17741935 2017-01-05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(minvol_percent)</code></pre></div>
+<pre><code>##                sector_name sector_count total     percent       date
+## 827 Information Technology           19   127 0.149606299 2011-10-31
+## 828              Materials            4   127 0.031496063 2011-10-31
+## 829            Real Estate            0   127 0.000000000 2011-10-31
+## 830         S-T Securities            1   127 0.007874016 2011-10-31
+## 831     Telecommunications            7   127 0.055118110 2011-10-31
+## 832              Utilities            9   127 0.070866142 2011-10-31</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(minvol_percent)</code></pre></div>
+<pre><code>##                   sector_name  sector_count          total          
+##  Cash and/or Derivatives: 64   Length:832         Length:832        
+##  Consumer Discretionary : 64   Class :character   Class :character  
+##  Consumer Staples       : 64   Mode  :character   Mode  :character  
+##  Energy                 : 64                                        
+##  Financials             : 64                                        
+##  Health Care            : 64                                        
+##  (Other)                :448                                        
+##     percent             date           
+##  Min.   :0.00000   Min.   :2011-10-31  
+##  1st Qu.:0.02235   1st Qu.:2013-02-21  
+##  Median :0.06349   Median :2014-06-14  
+##  Mean   :0.07692   Mean   :2014-06-14  
+##  3rd Qu.:0.13043   3rd Qu.:2015-10-07  
+##  Max.   :0.22222   Max.   :2017-01-05  
+## </code></pre>
+<p><em>Sector Weights for EUSA and USMV:</em></p>
+<pre><code>## 
+## Attaching package: &#39;mscidata&#39;</code></pre>
+<pre><code>## The following objects are masked _by_ &#39;.GlobalEnv&#39;:
+## 
+##     minvol, monthly_data, usa</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-2.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-3.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-4.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-5.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-6.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-7.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-8.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-9.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-10-10.png" width="672" /></p>
+</div>
+<div id="eusa-constituent-trailing-volatilities" class="section level2">
+<h2><span class="header-section-number">5.2</span> EUSA Constituent Trailing Volatilities</h2>
+<p>Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, was collected from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers’ 252-day (annual) trailing volatility was calculated and a month end spagetti plot was produced.</p>
+<pre><code>##           Date Ticker Volatility
+## 273 2008-01-31      A   2.289449
+## 293 2008-02-29      A   2.357208
+## 313 2008-03-31      A   2.660299
+## 335 2008-04-30      A   3.017754
+## 356 2008-05-30      A   3.028868
+## 377 2008-06-30      A   2.921781</code></pre>
+<pre><code>##               Date Ticker Volatility
+## 1950385 2016-07-29    ZTS   2.718338
+## 1950408 2016-08-31    ZTS   3.150629
+## 1950429 2016-09-30    ZTS   3.363564
+## 1950450 2016-10-31    ZTS   3.372530
+## 1950471 2016-11-30    ZTS   3.436391
+## 1950492 2016-12-30    ZTS   3.664053</code></pre>
+<pre><code>##       Date               Ticker            Volatility      
+##  Min.   :2007-01-31   Length:82262       Min.   :  0.0492  
+##  1st Qu.:2010-03-31   Class :character   1st Qu.:  2.4407  
+##  Median :2012-07-31   Mode  :character   Median :  4.3057  
+##  Mean   :2012-07-12                      Mean   :  6.9432  
+##  3rd Qu.:2014-10-31                      3rd Qu.:  7.4648  
+##  Max.   :2016-12-30                      Max.   :325.1242</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="eusa-constituent-trailing-betas" class="section level2">
+<h2><span class="header-section-number">5.3</span> EUSA Constituent Trailing Betas</h2>
+<p>Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, was collected from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers’ 252-day (annual) trailing beta was calculated and a month end spagetti plot was produced.</p>
+<pre><code>##           date ticker      beta
+## 1         &lt;NA&gt;   &lt;NA&gt;        NA
+## 271 2008-01-31      A 0.9538067
+## 291 2008-02-29      A 0.9473060
+## 311 2008-03-31      A 0.9376670
+## 333 2008-04-30      A 0.9588268
+## 354 2008-05-30      A 0.9680630</code></pre>
+<pre><code>##              date ticker      beta
+## 879817 2016-07-29    ZTS 1.0224673
+## 902806 2016-08-31    ZTS 1.0302957
+## 923805 2016-09-30    ZTS 0.9779760
+## 944802 2016-10-31    ZTS 0.9830767
+## 965801 2016-11-30    ZTS 0.9220281
+## 986798 2016-12-30    ZTS 0.9549808</code></pre>
+<pre><code>##       date               ticker               beta         
+##  Min.   :2007-04-30   Length:78532       Min.   :-23.3438  
+##  1st Qu.:2010-04-30   Class :character   1st Qu.:  0.8204  
+##  Median :2012-07-31   Mode  :character   Median :  1.0523  
+##  Mean   :2012-07-21                      Mean   :  1.0993  
+##  3rd Qu.:2014-10-31                      3rd Qu.:  1.3295  
+##  Max.   :2016-12-30                      Max.   : 20.3256  
+##  NA&#39;s   :1                               NA&#39;s   :1</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="eusa-constituent-price-to-book-ratios" class="section level2">
+<h2><span class="header-section-number">5.4</span> EUSA Constituent Price to Book Ratios</h2>
+<p>Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, was collected from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers’ Price to Book ratio was calculated in two ways, to ensure accuracy.</p>
+<pre><code>##    gvkey       Date Year Ticker Total_Assets BV_per_share
+## 1 126554 2007-10-31 2007      A    7.554e+09       8.7405
+## 2 126554 2008-10-31 2008      A    7.437e+09       7.3114
+## 3 126554 2009-10-31 2009      A    7.612e+09       7.2397
+## 4 126554 2010-10-31 2010      A    9.696e+09       9.3256
+## 5 126554 2011-10-31 2011      A    9.057e+09      12.4371
+## 6 126554 2011-10-31 2011      A    9.049e+09           NA
+##   Shares_Outstanding Total_Liabilities Market_Value Share_Price Book_Value
+## 1          370000000         4.320e+09  13634500000       36.85 3233985000
+## 2          350000000         4.878e+09   7766500000       22.19 2558990000
+## 3          346148000         5.106e+09   8563701500       24.74 2506007676
+## 4          346144000         6.460e+09  12045811200       34.80 3228000486
+## 5          346382000         4.741e+09  12840380700       37.07 4307987572
+## 6                 NA                NA  12840380700          NA         NA
+##       PBR1     PBR2
+## 1 4.216006 4.216006
+## 2 3.034986 3.034986
+## 3 3.417269 3.417269
+## 4 3.731663 3.731663
+## 5 2.980598 2.980598
+## 6       NA       NA</code></pre>
+<pre><code>##       gvkey       Date Year Ticker Total_Assets BV_per_share
+## 17182 13721 2014-12-31 2014    ZTS    6.607e+09       2.6151
+## 17183 13721 2014-12-31 2014    ZTS    6.588e+09           NA
+## 17184 13721 2015-12-31 2015    ZTS    7.913e+09       2.1472
+## 17185 13721 2015-12-31 2015    ZTS    7.913e+09           NA
+## 17186 13721 2016-12-31 2016    ZTS    7.649e+09       3.0171
+## 17187 13721 2016-12-31 2016    ZTS    7.649e+09           NA
+##       Shares_Outstanding Total_Liabilities Market_Value Share_Price
+## 17182          501328000         5.270e+09  21572143800       43.03
+## 17183                 NA                NA  21572143800          NA
+## 17184          497400000         6.822e+09  23835408000       47.92
+## 17185                 NA                NA  23835408000          NA
+## 17186          492855000         6.150e+09  26382528200       53.53
+## 17187                 NA                NA  26382528200          NA
+##       Book_Value     PBR1     PBR2
+## 17182 1311022853 16.45444 16.45444
+## 17183         NA       NA       NA
+## 17184 1068017280 22.31744 22.31744
+## 17185         NA       NA       NA
+## 17186 1486992820 17.74220 17.74220
+## 17187         NA       NA       NA</code></pre>
+<pre><code>##      gvkey                Date           Year          Ticker     
+##  Min.   :  1045   2013-12-31:1283   Min.   :2006   ACGL   :   33  
+##  1st Qu.:  7146   2012-12-31:1277   1st Qu.:2009   AET    :   33  
+##  Median : 14824   2014-12-31:1275   Median :2011   AFL    :   33  
+##  Mean   : 50895   2011-12-31:1265   Mean   :2011   AIZ    :   33  
+##  3rd Qu.: 65556   2015-12-31:1253   3rd Qu.:2014   AMG    :   33  
+##  Max.   :294524   2010-12-31:1222   Max.   :2016   ANTM   :   33  
+##                   (Other)   :9612   NA&#39;s   :33     (Other):16989  
+##   Total_Assets        BV_per_share      Shares_Outstanding 
+##  Min.   :0.000e+00   Min.   :-1489600   Min.   :0.000e+00  
+##  1st Qu.:3.912e+09   1st Qu.:       8   1st Qu.:1.010e+08  
+##  Median :9.538e+09   Median :      15   Median :1.973e+08  
+##  Mean   :4.725e+10   Mean   :    5311   Mean   :4.654e+08  
+##  3rd Qu.:2.632e+10   3rd Qu.:      27   3rd Qu.:4.344e+08  
+##  Max.   :2.573e+12   Max.   :16297416   Max.   :2.906e+10  
+##  NA&#39;s   :2568        NA&#39;s   :9284       NA&#39;s   :9188       
+##  Total_Liabilities    Market_Value        Share_Price      
+##  Min.   :0.000e+00   Min.   :3.545e+06   Min.   :   0.027  
+##  1st Qu.:2.135e+09   1st Qu.:4.445e+09   1st Qu.:  25.985  
+##  Median :6.310e+09   Median :8.851e+09   Median :  43.180  
+##  Mean   :4.451e+10   Mean   :2.166e+10   Mean   :  57.339  
+##  3rd Qu.:1.865e+10   3rd Qu.:1.942e+10   3rd Qu.:  67.955  
+##  Max.   :2.341e+12   Max.   :6.266e+11   Max.   :1466.060  
+##  NA&#39;s   :7785        NA&#39;s   :2764        NA&#39;s   :10064     
+##    Book_Value              PBR1               PBR2         
+##  Min.   :-8.615e+10   Min.   :-687.634   Min.   :-687.634  
+##  1st Qu.: 1.313e+09   1st Qu.:   1.595   1st Qu.:   1.595  
+##  Median : 3.121e+09   Median :   2.626   Median :   2.626  
+##  Mean   : 8.170e+09   Mean   :   4.503   Mean   :   4.503  
+##  3rd Qu.: 7.376e+09   3rd Qu.:   4.416   3rd Qu.:   4.416  
+##  Max.   : 2.416e+11   Max.   :1575.000   Max.   :1575.000  
+##  NA&#39;s   :9284         NA&#39;s   :10079      NA&#39;s   :10079</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-collection-and-summary-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
