@@ -2,7 +2,9 @@
 title: "05 - Model"
 author: "John Gilheany"
 date: "9/13/2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 # Model 
@@ -35,7 +37,8 @@ exp(coef(logit1))
 confint.default(logit1)
 ``` 
 
-Looking at the monthly data is not a true representation of the results, because th index is rebalanced once every six months - not once a month. 
+Looking at the monthly data is not a true representation of the results, because the index is rebalanced once every six months - not once a month. 
+
 
 
 
