@@ -303,9 +303,9 @@ Concordance(testData2$index_now, predicted2)
 \hfill\break
 _Specificity and Sensitivity_
 \hfill\break
-- Sensitivity (or True Positive Rate) is the percentage of 1’s (actuals) correctly predicted by the model, while, specificity is the percentage of 0’s (actuals) correctly predicted. In this model, it was found to be 89.6%.
+- Sensitivity (or True Positive Rate) is the percentage of 1’s (actuals) correctly predicted by the model, while, specificity is the percentage of 0’s (actuals) correctly predicted. In this model, it was found to be 85.8%.
 \hfill\break
-- Specificity can also be calculated as 1 - False Positive Rate. In this model, it was found to be 97.9%. 
+- Specificity can also be calculated as 1 - False Positive Rate. In this model, it was found to be 97.3%. 
 ```{r}
 sensitivity(testData2$index_now, predicted2, threshold = optCutOff2)
 specificity(testData2$index_now, predicted2, threshold = optCutOff2)
@@ -320,6 +320,140 @@ confusionMatrix(testData2$index_now, predicted2, threshold = optCutOff2)
 
 
 ## Model 3: May Model 
+Since the index is rebalanced twice a year (once in November and once in May), it makes sense to look at a model for each of these individual months. Thus, a subset of the data was taken for May, and the same procedures done at with Model 1. 
+
+```{r}
+# Subset data for dates from May only
+may_final <- filter(monthly_final, date == "2012-05-31" |  date == "2013-05-31"| date == "2014-05-30" | date == "2015-05-29" | date == "2016-05-31")
+# Remove NA values from set
+may_final <- subset(may_final, !is.na(index_before))
+```
+### Data Cleaning - Checking for Class Bias
+Ideally, the proportion of stocks in and out of the USMV index should approximately be the same. Checking this, we can see that this is not the case. However, just around 24% of the data is from stocks that ereurrently in the index, so there is a class bias. As a result, we must sample the observations in approximately equal proportions to get a better model.
+```{r}
+table(may_final$index_now)
+```
+### Create Training and Test Samples
+One way to address the problem of class bias is to draw the 0’s and 1’s for the trainingData (development sample) in equal proportions. In doing so, we will put rest of the inputData not included for training into testData (validation sample). As a result, the size of development sample will be smaller that validation, which is okay, because, there are large number of observations.
+```{r}
+# Create Training Data
+input_ones3 <- may_final[which(may_final$index_now == 1), ]  # all 1's
+input_zeros3 <- may_final[which(may_final$index_now == 0), ]  # all 0's
+set.seed(100)  # for repeatability of samples
+input_ones_training_rows3 <- sample(1:nrow(input_ones3), 0.7*nrow(input_ones3))  # 1's for training
+input_zeros_training_rows3 <- sample(1:nrow(input_zeros3), 0.7*nrow(input_ones3))  # 0's for training. Pick as many 0's as 1's
+training_ones3 <- input_ones3[input_ones_training_rows3, ]  
+training_zeros3 <- input_zeros3[input_zeros_training_rows3, ]
+trainingData3 <- rbind(training_ones3, training_zeros3)  # row bind the 1's and 0's 
+# Create Test Data
+test_ones3 <- input_ones3[-input_ones_training_rows3, ]
+test_zeros3 <- input_zeros3[-input_zeros_training_rows3, ]
+testData3 <- rbind(test_ones3, test_zeros3)  # row bind the 1's and 0's 
+```
+Now we can check class bias to see if it is more balanced. It is evenly weighted now, with each being represented by 493 observations. 
+```{r}
+table(trainingData3$index_now)
+```
+
+### Logistic Regression Model 
+Now the model can be run:
+```{r}
+# Model 3
+logit3 <- glm(index_now ~  volatility + beta + price_to_book + index_before, data=trainingData3, family=binomial(link="logit"))
+
+# Summary of Model 3
+summary(logit3)
+
+# Coefficient Interpretation
+## Log Odds
+exp(coef(logit3))
+## Probability 
+(exp(coef(logit3))) / (1+(exp(coef(logit3))))
+``` 
+Looking at the May model will be helpful for someone looking to predict index rebalancing between December and April. 
+
+### Interpretation of Model
+The model can be interpreted as:
+\hfill\break
+ln[$\frac{p}{1-p}$] = -1.74 - 0.04 x vol - 0.64 x beta - 0.012 x price_to_book + 7.014 x index_before 
+\hfill\break
+$\frac{p}{1-p}$ = exp(-1.74 - 0.04 x vol - 0.64 x beta - 0.012 x price_to_book + 7.014 x index_before )
+\hfill\break
+The coefficients can be interpreted as: 
+\hfill\break
+- Volatility: The odds ratio of being added to the index is 0.96 times smaller, given a one unit increase in volatility. This response variable is not statistically significant.
+\hfill\break
+- Beta: The odds ratio of being added to the index is 0.52 times smaller, given a one unit increase in beta. This response variable is statistically significant. 
+\hfill\break
+- Price to Book: The odds ratio of being added to the index is 0.99 times smaller, given a one unit increase in price to book ratio. This response variable is not statistically significant. 
+\hfill\break
+- Index before: The odds ratio of being added to the index is 1112.01 times greater if the stock was in the index 6 months ago. This response variable is statistically significant. 
+\hfill\break
+\hfill\break
+
+### Sanity Check
+Will do later if useful.
+
+### Model Quality 
+To test the quality of the model, several tests were done:
+\hfill\break
+_Predictive Power_
+\hfill\break
+The default cutoff prediction probability score is 0.5 or the ratio of 1’s and 0’s in the training data. But sometimes, tuning the probability cutoff can improve the accuracy in both the development and validation samples. The InformationValue::optimalCutoff function provides ways to find the optimal cutoff to improve the prediction of 1’s, 0’s, both 1’s and 0’s and to reduce the misclassification error. Here, the optimal cut off is 0.98.
+```{r}
+library(InformationValue)
+optCutOff3 <- optimalCutoff(testData3$index_now, predicted3)[1] 
+```
+\hfill\break
+_VIF_**_
+\hfill\break
+Like in case of linear regression, we should check for multicollinearity in the model. As seen below, all X variables in the model have VIF well below 4.
+```{r}
+library(car)
+vif(logit3)
+```
+\hfill\break
+_Misclassification Error_
+\hfill\break
+Misclassification error is the percentage mismatch of predicted vs actuals, irrespective of 1’s or 0’s. The lower the misclassification error, the better the model. Here it is 2.6%, which is quite low, and good.  
+```{r}
+predicted3 <- plogis(predict(logit3, testData3)) 
+misClassError(testData3$index_now, predicted3)
+```
+\hfill\break
+_ROC_
+\hfill\break
+Receiver Operating Characteristics Curve traces the percentage of true positives accurately predicted by a given logit model as the prediction probability cutoff is lowered from 1 to 0. For a good model, as the cutoff is lowered, it should mark more of actual 1’s as positives and lesser of actual 0’s as 1’s. So for a good model, the curve should rise steeply, indicating that the TPR (Y-Axis) increases faster than the FPR (X-Axis) as the cutoff score decreases. Greater the area under the ROC curve, better the predictive ability of the model. Here, it is 96.5%.
+```{r}
+plotROC(testData3$index_now, predicted3)
+```
+\hfill\break
+_Concordance_
+\hfill\break
+Ideally, the model-calculated-probability-scores of all actual Positive’s, (aka Ones) should be greater than the model-calculated-probability-scores of ALL the Negatives (aka Zeroes). Such a model is said to be perfectly concordant and a highly reliable one. This phenomenon can be measured by Concordance and Discordance.
+
+In simpler words, of all combinations of 1-0 pairs (actuals), Concordance is the percentage of pairs, whose scores of actual positive’s are greater than the scores of actual negative’s. For a perfect model, this will be 100%. So, the higher the concordance, the better is the quality of model. This model with a concordance of 97.3% is a good quality model.
+```{r}
+Concordance(testData3$index_now, predicted3)
+```
+\hfill\break
+_Specificity and Sensitivity_
+\hfill\break
+- Sensitivity (or True Positive Rate) is the percentage of 1’s (actuals) correctly predicted by the model, while, specificity is the percentage of 0’s (actuals) correctly predicted. In this model, it was found to be 92.0%.
+\hfill\break
+- Specificity can also be calculated as 1 - False Positive Rate. In this model, it was found to be 98.3%. 
+```{r}
+sensitivity(testData3$index_now, predicted3, threshold = optCutOff3)
+specificity(testData3$index_now, predicted3, threshold = optCutOff3)
+```
+\hfill\break
+_Confusion Matrix_
+\hfill\break
+In the confusion matrix, the columns are actuals, while rows are predicteds
+```{r}
+confusionMatrix(testData3$index_now, predicted3, threshold = optCutOff3)
+```
+
 
 ## Model 4: Total Rebalancing (November & May) Model 
 
