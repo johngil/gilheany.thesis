@@ -12,7 +12,6 @@ Once the final data set was created and cleaned, with a number of response varia
 
 A snippet of the final data set is shown below
 ```{r}
-data(monthly_final)
 head(monthly_final)
 
 tail(monthly_final)
