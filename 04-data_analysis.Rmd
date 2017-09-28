@@ -153,4 +153,26 @@ tail(book_value_data)
 summary(book_value_data)
 ```
 
+# Data Distribution 
+Here, the distribution of the predictor variable, if the stock is in the index now, with respect to each response variable will be shown.
+
+## Index now vs. Trailing Volatility 
+```{r, echo = FALSE}
+ggplot(monthly_final, aes(x=volatility, y=index_now)) + geom_point()
+```
+
+## Index now vs. Trailing Beta 
+```{r, echo = FALSE}
+ggplot(monthly_final, aes(x=beta, y=index_now)) + geom_point() 
+```
+
+## Index now vs. Price to Book Ratio 
+```{r, echo = FALSE}
+ggplot(monthly_final, aes(x=price_to_book, y=index_now)) + geom_point() 
+```
+
+## Index now vs. Index 6 months ago
+```{r, echo = FALSE}
+ggplot(monthly_final, aes(x=index_before, y=index_now)) + geom_point()
+```
 

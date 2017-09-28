@@ -7,40 +7,199 @@ output:
   html_document: default
 ---
 
-# Model 
-Once the final data set was created and cleaned, with a number of response variables including trailing beta, trailing vol, and price to book value, and an associated outcome. The outcome measured whether or not a stock was in the Min Vol index or not (1 if in, 0 if not in).
+# Data Cleaning 
+Before running the models, the data must be cleaned. 
 
-A snippet of the final data set is shown below
+## Check for class bias 
+Ideally, the proportion of stocks in and out of the USMV index should approximately be the same. Checking this, we can see that this is not the case. Just around 24% of the data is from stocks that ereurrently in the index, so there is a class bias. As a result, we must sample the observations in approximately equal proportions to get better models.
 ```{r}
-head(monthly_final)
+table(monthly_final$index_now)
+```
 
-tail(monthly_final)
+## Create Training and Test Samples
+One way to address the problem of class bias is to draw the 0’s and 1’s for the trainingData (development sample) in equal proportions. In doing so, we will put rest of the inputData not included for training into testData (validation sample). As a result, the size of development sample will be smaller that validation, which is okay, because, there are large number of observations.
+```{r}
+# Create Training Data
+input_ones <- monthly_final[which(monthly_final$index_now == 1), ]  # all 1's
+input_zeros <- monthly_final[which(monthly_final$index_now == 0), ]  # all 0's
+set.seed(100)  # for repeatability of samples
+input_ones_training_rows <- sample(1:nrow(input_ones), 0.7*nrow(input_ones))  # 1's for training
+input_zeros_training_rows <- sample(1:nrow(input_zeros), 0.7*nrow(input_ones))  # 0's for training. Pick as many 0's as 1's
+training_ones <- input_ones[input_ones_training_rows, ]  
+training_zeros <- input_zeros[input_zeros_training_rows, ]
+trainingData <- rbind(training_ones, training_zeros)  # row bind the 1's and 0's 
 
-summary(monthly_final)
+# Create Test Data
+test_ones <- input_ones[-input_ones_training_rows, ]
+test_zeros <- input_zeros[-input_zeros_training_rows, ]
+testData <- rbind(test_ones, test_zeros)  # row bind the 1's and 0's 
+
+# Remove NA values in index_before
+testData <- subset(testData, !is.na(index_before))
+trainingData <- subset(trainingData, !is.na(index_before))
+```
+Now we can check class bias to see if it is more balanced. It is very close to being evenly weighted now. 
+```{r}
+table(trainingData$index_now)
+```
+
+# Model 
+Once the final data set was created and cleaned, with a number of response variables including trailing beta, trailing vol, and price to book value, and the associated outcome, which was measured by whether or not a stock was in the Min Vol index or not (1 if in, 0 if not in).
+
+A snippet of the  data set is shown below
+```{r}
+head(trainingData)
+
+tail(trainingData)
+
+summary(trainingData)
 ```
 
 Given the data, a logit regression was run on the entire pool of data. Looking at all of the historical data and stock various characteristics, this would model the log odds of a stock being in the minimum volatility index as a combination of the linear predictors mentioned. Several models will be run in a panel, including one by month, and one by the entire pool of data.
 
 ## Model 1: Entire Data Set (Monthly)
-The first logit model that will be run is for the entire pool of data. 
+The first logit model that will be run is for the entire pool of monthly data. 
 ```{r}
 # Model 1
-logit1 <- glm(index_now ~  volatility + beta + price_to_book + index_before, data = monthly_final, family = "binomial")
+logit1 <- glm(index_now ~  volatility + beta + price_to_book + index_before, data=trainingData, family=binomial(link="logit"))
+
 # Summary of Model 1
 summary(logit1)
 
 # Coefficient Interpretation
+## Log Odds
 exp(coef(logit1))
-
-# Confidence interval of variable
-confint.default(logit1)
+## Probability 
+(exp(coef(logit1))) / (1+(exp(coef(logit1))))
 ``` 
-
 Looking at the monthly data is not a true representation of the results, because the index is rebalanced once every six months - not once a month. 
 
+### Interpretation
+The model can be interpreted as:
+\hfill\break
+ln[$\frac{p}{1-p}$] = -3.094 - 0.0032 x vol - 0.25 x beta + 0.00051 x price_to_book + 6.017 x index_before 
+\hfill\break
+$\frac{p}{1-p}$ = exp(-3.094 - 0.0032 x vol - 0.25 x beta + 0.00051 x price_to_book + 6.017 x index_before)
+\hfill\break
+The coefficients can be interpreted as: 
+\hfill\break
+- Volatility: The odds ratio of being added to the index is 0.997 times smaller, given a one unit increase in volatility. This response variable is not statistically significant. 
+\hfill\break
+- Beta: The odds ratio of being added to the index is 0.778 times smaller, given a one unit increase in beta. This response variable is statistically significant. 
+\hfill\break
+- Price to Book: The odds ratio of being added to the index is 1.0051 times greater, given a one unit increase in price to book ratio. This response variable is not statistically significant. 
+\hfill\break
+- Index before: The odds ratio of being added to the index is 410.261 times greater if the stock was in the index 6 months ago. This response variable is  statistically significant. 
+\hfill\break
+\hfill\break
+
+### Sanity Check
+To take a sample stock to understand the model, we can look at a stock that was not in the USMV index on 12-30-2016, as see how accurate our model would be in predicting the probability of this stock being in the index. We can take AAL (American Airlines), which had a beta of 1.6312867, volatility of 0.8067945, price to book ratio of 4.6943413, and was not in the USMV index 6 months ago. This stock ended up not being in the minimum volatility index on 12-30-2016, so we would expect a probability to be relatively low. 
+\hfill\break
+- Odds Ratio:
+\hfill\break
+$\frac{p}{1-p}$ = exp(-3.094 - 0.0032 x 0.8067945 - 0.25 x 1.6312867 + 0.00051 x 4.6943413 + 6.017 x 0)
+\hfill\break
+$\frac{p}{1-p}$ = 0.03013677
+\hfill\break
+\hfill\break
+- Probability: 
+\hfill\break
+p = (exp(-3.094 - 0.0032 x 0.8067945 - 0.25 x 1.6312867 + 0.00051 x 4.6943413 + 6.017 x 0) / (1+exp(-3.094 - 0.0032 x 0.8067945 - 0.25 x 1.6312867 + 0.00051 x 4.6943413 + 6.017 x 0)))
+\hfill\break
+p = 0.02925511
+\hfill\break
+\hfill\break
+The odds of AAL being in the index on 12-30-2016 is 0.03013677, and this translates to a probability of 2.93%. As expected, already knowing that the stock was not in the index, this low probability seems reasonable. 
+\hfill\break
+To further understand the model, we can look at a stock that was was in the USMV index on 12-30-2016, as see how accurate our model would be in predicting the probability of this stock being in the index. We can take AAPL (Apple), which had a beta of 1.0099644, volatility of 0.6118842, price to book ratio of 4.7037726, and it was in the USMV index 6 months ago. This stock ended up being in the minimum volatility index on 12-30-2016, so we would expect a probability to be relatively high 
+\hfill\break
+- Odds Ratio:
+\hfill\break
+$\frac{p}{1-p}$ = exp(-3.094 - 0.0032 x 0.6118842 - 0.25 x 1.0099644 + 0.00051 x 4.7037726 + 6.017 x 1)
+\hfill\break
+$\frac{p}{1-p}$ = 14.45369
+\hfill\break
+- Probability: 
+\hfill\break
+p = (exp(-3.094 - 0.0032 x 0.6118842 - 0.25 x 1.0099644 + 0.00051 x 4.7037726 + 6.017 x 1) / (1+exp(-3.094 - 0.0032 x 0.6118842 - 0.25 x 1.0099644 + 0.00051 x 4.7037726 + 6.017 x 1)))
+\hfill\break
+p = 0.9352905
+\hfill\break
+\hfill\break
+The odds of AAL being in the index on 12-30-2016 is 14.45369, and this translates to a probability of 93.53%. As expected, already knowing that the stock was in the index, this high probability seems reasonable. 
+
+### Model Quality 
+To test the quality of the model, several tests were done:
+\hfill\break
+_Predictive Power_
+\hfill\break
+The default cutoff prediction probability score is 0.5 or the ratio of 1’s and 0’s in the training data. But sometimes, tuning the probability cutoff can improve the accuracy in both the development and validation samples. The InformationValue::optimalCutoff function provides ways to find the optimal cutoff to improve the prediction of 1’s, 0’s, both 1’s and 0’s and to reduce the misclassification error. Here, the optimal cut off is 0.74.
+```{r}
+library(InformationValue)
+optCutOff <- optimalCutoff(testData$index_now, predicted)[1] 
+```
+\hfill\break
+_VIF_**_
+\hfill\break
+Like in case of linear regression, we should check for multicollinearity in the model. As seen below, all X variables in the model have VIF well below 4.
+```{r}
+library(car)
+vif(logit1)
+```
+\hfill\break
+_Misclassification Error_
+\hfill\break
+Misclassification error is the percentage mismatch of predicted vs actuals, irrespective of 1’s or 0’s. The lower the misclassification error, the better the model. Here it is 3.1%, which is quite low, and thus good.  
+```{r}
+predicted <- plogis(predict(logit1, testData)) 
+misClassError(testData$index_now, predicted)
+```
+\hfill\break
+_ROC_
+\hfill\break
+Receiver Operating Characteristics Curve traces the percentage of true positives accurately predicted by a given logit model as the prediction probability cutoff is lowered from 1 to 0. For a good model, as the cutoff is lowered, it should mark more of actual 1’s as positives and lesser of actual 0’s as 1’s. So for a good model, the curve should rise steeply, indicating that the TPR (Y-Axis) increases faster than the FPR (X-Axis) as the cutoff score decreases. Greater the area under the ROC curve, better the predictive ability of the model. Here, it is 96.3%.
+```{r}
+plotROC(testData$index_now, predicted)
+```
+\hfill\break
+_Concordance_
+\hfill\break
+Ideally, the model-calculated-probability-scores of all actual Positive’s, (aka Ones) should be greater than the model-calculated-probability-scores of ALL the Negatives (aka Zeroes). Such a model is said to be perfectly concordant and a highly reliable one. This phenomenon can be measured by Concordance and Discordance.
+
+In simpler words, of all combinations of 1-0 pairs (actuals), Concordance is the percentage of pairs, whose scores of actual positive’s are greater than the scores of actual negative’s. For a perfect model, this will be 100%. So, the higher the concordance, the better is the quality of model. This model with a concordance of 97.2% is a good quality model.
+```{r}
+Concordance(testData$index_now, predicted)
+```
+\hfill\break
+_Specificity and Sensitivity_
+\hfill\break
+- Sensitivity (or True Positive Rate) is the percentage of 1’s (actuals) correctly predicted by the model, while, specificity is the percentage of 0’s (actuals) correctly predicted. In this model, it was found to be 89.6%.
+\hfill\break
+- Specificity can also be calculated as 1 - False Positive Rate. In this model, it was found to be 97.9%. 
+```{r}
+sensitivity(testData$index_now, predicted, threshold = optCutOff)
+specificity(testData$index_now, predicted, threshold = optCutOff)
+```
+\hfill\break
+_Confusion Matrix_
+\hfill\break
+In the confusion matrix, the columns are actuals, while rows are predicteds
+```{r}
+confusionMatrix(testData$index_now, predicted, threshold = optCutOff)
+```
 
 
 
-## Model 2: Monthly
 
-## Model 3: Panel Regression
+
+
+
+
+## Model 2: November Model 
+
+## Model 3: May Model 
+
+## Model 4: Total Rebalancing (November & May) Model 
+
+## Side by Side Model Comparison 
