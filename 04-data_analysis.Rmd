@@ -116,7 +116,6 @@ Data was collected from the past 10 years of the EUSA index. The data was collec
 
 ```{r, echo = FALSE}
 library(ggplot2)
-library(mscidata)
 
 head(monthly_rolling_vol)
 tail(monthly_rolling_vol)
@@ -131,7 +130,6 @@ Data was collected from the past 10 years of the EUSA index. The data was collec
 
 ```{r, echo = FALSE}
 library(ggplot2)
-library(mscidata)
 
 head(monthly_beta_values)
 tail(monthly_beta_values)

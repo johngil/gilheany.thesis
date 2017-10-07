@@ -83,8 +83,11 @@ As we can see, the returns seem pretty consistent and have a correlation greater
 
 Shown below is the data for USMV.
 
-```{r, echo = FALSE}
+```{r}
 # USA data
+library(ggplot2)
+data(usa)
+data(minvol)
 data(returns2)
 ggplot(returns2, aes(x=weighted_return, y=eminvol_return)) +
 	geom_point(shape=1) +  geom_smooth(method=lm) + ggtitle("USMV returns vs. USMV constructed weighted returns")
