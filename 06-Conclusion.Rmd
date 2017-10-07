@@ -27,13 +27,14 @@ ols_table <- all_models %>%
 ols_table
 ```
 
-## Model 1: Entire Data Set (Monthly)
-In this model, the variables beta and index_before were found to be statistically significant, while the variables volatility and price to book ratio were found to not be statistically significant. 
-
-## Model 2: Monthly
-
-## Model 3: Panel Regression
+As seen, each model gave out pretty similar coefficient values for the various response variables. Beta ranged between -0.31 and -0.64, index_before ranged from 5.08 to 7.01, price to book ranged from 0.00 to -0.01, and volatility ranged between -0.04 and 0.06. 
 
 # Discussion
-After comparing all of the models....
+After comparing all of the models, it makes sense to discuss the applications of these various models to the real world, and to finance. 
+
+## Understanding of Relationships 
+Through these models, we can get a better understanding of the relationships between the predictor variables, and whether or not the stock is in the Min Vol index. In general, each model suggested an increase in beta will reduce the likelihood of a stock being in the min vol index, with all else held constant. This makes sense, as beta is one measure of risk and volatility. Moreover, it is a widely used metric in finance, so it is not surpising that it is a statistically significant variable. Moreover, the most significant variable was whether or not the stock was in the index before. This makes a lot of sense, as a stock currently in the index presumably has many min vol characteristics from before, that must be signficantly altered if it were to be removed. Moreover, stocks that were in the index previously were many times more likely to be in the index currently, than stocks that had previously not been in the index. This variable was also statistically significant. Surpisingly, volatility was not statistically signficant, though the index itself is called the "Minimum Volatility" Index. Moreover, price to book was also an insignficant variable, which does make sense. Each model was able to quantify these relationships, and help us better understand what 
+
+## Arbitrage 
+Each model was able to take various attributes of a stock, and calculate a probability for it currently being in the index. Using the optimal cutoffs, we were able to get a sense of the probability value that would be significant in determining when a stock would be in or out of the index. For example, at a cutoff of 0.9, this would tell us that we could reasonably expect stocks with a probability of over 90% to be in the index, and stocks with less than a 90% probability to not be in the index. With this information, there are many different arbitrage opportunities. One could long stocks currently not in the index that have a probability greater than the optimal cutoff for that model. This would represent the stocks with the greatest chance of being added to the index, that are currently not in the index. If correct, prior studies would suggest that the stock price would consequently increase from this happening. Moreover, one could short stocks that are currently in the index, that have a probability value less than the cutoff. This could lead to an arbritrage opportunity if the stock is removed from the index, as one is short it. 
 
