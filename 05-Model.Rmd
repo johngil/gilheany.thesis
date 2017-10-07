@@ -591,6 +591,7 @@ confusionMatrix(testData4$index_now, predicted4, threshold = optCutOff4)
 ## Side by Side Model Comparison 
 ```{r}
 library(broom)
+library(tidyr)
 all_models <- rbind_list(
     tidy(logit1) %>% mutate(model = 1),
     tidy(logit2) %>% mutate(model = 2),

@@ -101,6 +101,7 @@ The correlation is 0.99, which is also very good.
 The next thing we want to see is how the top 5 largest holdings, by average weight, in each index have changed in weighting over time. For EUSA, the 5 largest holdings were AAPL, XOM, MSFT, GE, and JNJ. Their change in weights are shown below. 
 
 ```{r, echo = FALSE}
+data(usa)
 usa_weight3 <- aggregate(weight ~ ticker, data=usa, FUN=sum)
 minvol_weight3 <- aggregate(weight ~ ticker, data=minvol, FUN=sum)
 library(dplyr)

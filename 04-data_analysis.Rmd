@@ -136,7 +136,7 @@ tail(monthly_beta_values)
 summary(monthly_beta_values)
 
 # Spaggeti plot for monthly Beta
-ggplot(monthly_beta_values, aes(date, beta, group = ticker)) + geom_line()
+ggplot(monthly_beta_values, aes(Date, Beta, group = Ticker)) + geom_line()
 ```
 
 ## EUSA Constituent Price to Book Ratios 
@@ -144,7 +144,6 @@ Data was collected from the past 10 years of the EUSA index. The data was collec
 
 ```{r, echo = FALSE}
 library(ggplot2)
-library(mscidata)
 
 head(book_value_data)
 tail(book_value_data)
