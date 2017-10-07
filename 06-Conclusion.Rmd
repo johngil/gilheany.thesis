@@ -6,16 +6,29 @@ output: html_document
 ---
 
 # Conclusion  
-- Will discuss the different models, and what they each mean, then chose the best one that is most representative of the data that I believe will have the highest predictive power. 
+All in all, the 4 models were comprable in terms of statistical resiliency and predictive power. Each model may have a different usage, based of each model's strengths and weaknesses, and what goals the investor has in mind for the model. For example, an investor looking to capture an arbitrage opportunity in November, might be best suited in looking at the November specific model. Someone looking for abritrage opportunities throughout the year during both rebalances might look at the combined May and November model. 
 
-## Model 1: Entire Data Set 
-- Looking at the z-statistics, volatility and beta are statistically significant, while price to book is not, at an alpha level of 0.05.
-- For every one unit change in the beta, the log odds of being in the min vol index decrease by 1.92. 
-- The odds ratio for beta is 0.15.
-- For every one unit change in the vol, the log odds of being in the min vol index decrease by 0.025. 
-- The odds ratio for vol is 0.98.
-- For every one unit change in the price to book, the log odds of being in the min vol index decrease by 0.00036. 
-- The odds ratio for beta is 0.99.
+## Side by Side Model Comparison 
+```{r, echo=FALSE}
+library(broom)
+library(tidyr)
+all_models <- rbind_list(
+    tidy(logit1) %>% mutate(model = 1),
+    tidy(logit2) %>% mutate(model = 2),
+    tidy(logit3) %>% mutate(model = 3), 
+    tidy(logit4) %>% mutate(model = 4))
+
+ols_table <- all_models %>%
+    select(-statistic, -p.value) %>%
+    mutate_each(funs(round(., 2)), -term) %>% 
+    gather(key, value, estimate:std.error) %>%
+    spread(model, value) 
+
+ols_table
+```
+
+## Model 1: Entire Data Set (Monthly)
+In this model, the variables beta and index_before were found to be statistically significant, while the variables volatility and price to book ratio were found to not be statistically significant. 
 
 ## Model 2: Monthly
 

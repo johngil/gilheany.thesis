@@ -588,22 +588,3 @@ In the confusion matrix, the columns are actuals, while rows are predicteds
 confusionMatrix(testData4$index_now, predicted4, threshold = optCutOff4)
 ```
 
-## Side by Side Model Comparison 
-```{r}
-library(broom)
-library(tidyr)
-all_models <- rbind_list(
-    tidy(logit1) %>% mutate(model = 1),
-    tidy(logit2) %>% mutate(model = 2),
-    tidy(logit3) %>% mutate(model = 3), 
-    tidy(logit4) %>% mutate(model = 4))
-
-ols_table <- all_models %>%
-    select(-statistic, -p.value) %>%
-    mutate_each(funs(round(., 2)), -term) %>% 
-    gather(key, value, estimate:std.error) %>%
-    spread(model, value) 
-
-ols_table
-```
-
