@@ -6,7 +6,7 @@ output:
 # Data Analysis 
 
 ## Sector Weights
-First, sector weights were calculated over time for both EUSA and USMV. Plots were made by sector and displayed to compare the relative weights of EUSA and USMV. 
+Sector weights were calculated over time for both EUSA and USMV. Plots were made and displayed to compare the relative sector weights of EUSA and USMV. This was done to get a sense of what industries may be inherently more "low risk," as well as making sure the data is resilient, and each sector weighting is within 5% as specified by the Barra Optimizer. 
 
 *Sector Weight Summary Statistics:*
 
@@ -112,7 +112,7 @@ y=percent, colour="Min Vol"),show.legend = TRUE)
 ```
 
 ## EUSA Constituent Trailing Volatilities 
-Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, was collected from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers' 252-day (annual) trailing volatility was calculated and a month end spagetti plot was produced.
+Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, from Wharton Research Data Services (WRDS) for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers' 252-day (annual) trailing volatility was calculated and a month end spagetti plot was produced.
 
 ```{r, echo = FALSE}
 library(ggplot2)
@@ -140,7 +140,7 @@ ggplot(monthly_beta_values, aes(Date, Beta, group = Ticker)) + geom_line()
 ```
 
 ## EUSA Constituent Price to Book Ratios 
-Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, was collected from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers' Price to Book ratio was calculated in two ways, to ensure accuracy. 
+Data was collected from the past 10 years of the EUSA index. The data was collected from 12/31/2006 to 12/30/2016, from WRDS for the 908 historical constituents of the USA Equal Weight (EUSA) index, of which USMV is derived. Each tickers' Price to Book ratio was calculated in two ways, to ensure accuracy. 
 
 ```{r, echo = FALSE}
 library(ggplot2)
@@ -151,7 +151,7 @@ summary(book_value_data)
 ```
 
 # Data Distribution 
-Here, the distribution of the predictor variable, if the stock is in the index now, with respect to each response variable will be shown.
+The distribution of the predictor variable, if the stock is in the index now, with respect to each response variable is shown below. 
 
 ## Index now vs. Trailing Volatility 
 ```{r, echo = FALSE}

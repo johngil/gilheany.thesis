@@ -1,5 +1,5 @@
 --- 
-title: "Thesis"
+title: "Forecasting Constituents of the Minimum Volatility Index"
 author: "John Gilheany"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
